@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @barangay.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @barangay.description %>
+</p>
+
+<p>
+  <strong>Remarks:</strong>
+  <%= @barangay.remarks %>
+</p>
+
+<%= link_to 'Edit', edit_barangay_path(@barangay) %> |
+<%= link_to 'Back', barangays_path %>
