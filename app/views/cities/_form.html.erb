@@ -1,37 +1,37 @@
 <%= form_with(model: city, local: true) do |form| %>
   <% if city.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(city.errors.count, "error") %> prohibited this city from being saved:</h2>
-
-      <ul>
-      <% city.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+    <div class="alert alert-danger">
+      <strong><%= pluralize(city.errors.count, "error") %> prohibited this city from being saved:</strong>
+      <ul class="mb-0 mt-2">
+        <% city.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="form-group">
+    <%= form.label :name, class: "font-weight-bold" %>
+    <%= form.text_field :name, class: "form-control", placeholder: "Enter city or municipality name" %>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+  <div class="form-group">
+    <%= form.label :description, class: "font-weight-bold" %>
+    <%= form.text_area :description, rows: 4, class: "form-control", placeholder: "Short description" %>
   </div>
 
-  <div class="field">
-    <%= form.label :remarks %>
-    <%= form.text_area :remarks %>
+  <div class="form-group">
+    <%= form.label :remarks, class: "font-weight-bold" %>
+    <%= form.text_area :remarks, rows: 3, class: "form-control", placeholder: "Additional remarks" %>
   </div>
 
-  <div class="field">
-    <%= form.label :is_municipality %>
-    <%= form.check_box :is_municipality %>
+  <div class="form-group form-check mb-4">
+    <%= form.check_box :is_municipality, class: "form-check-input" %>
+    <%= form.label :is_municipality, "Municipality", class: "form-check-label" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="d-flex justify-content-between mt-4">
+    <%= link_to 'Back', cities_path, class: 'btn btn-outline-secondary' %>
+    <%= form.submit class: 'btn text-white', style: 'background-color: #0F0E47; border-color: #363636;' %>
   </div>
 <% end %>

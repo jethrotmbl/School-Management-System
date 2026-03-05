@@ -1,32 +1,32 @@
 <%= form_with(model: region, local: true) do |form| %>
   <% if region.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(region.errors.count, "error") %> prohibited this region from being saved:</h2>
-
-      <ul>
-      <% region.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+    <div class="alert alert-danger">
+      <strong><%= pluralize(region.errors.count, "error") %> prohibited this region from being saved:</strong>
+      <ul class="mb-0 mt-2">
+        <% region.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="form-group">
+    <%= form.label :name, class: "font-weight-bold" %>
+    <%= form.text_field :name, class: "form-control", placeholder: "Enter region name" %>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+  <div class="form-group">
+    <%= form.label :description, class: "font-weight-bold" %>
+    <%= form.text_area :description, rows: 4, class: "form-control", placeholder: "Short description" %>
   </div>
 
-  <div class="field">
-    <%= form.label :remarks %>
-    <%= form.text_area :remarks %>
+  <div class="form-group">
+    <%= form.label :remarks, class: "font-weight-bold" %>
+    <%= form.text_area :remarks, rows: 3, class: "form-control", placeholder: "Additional remarks" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="d-flex justify-content-between mt-4">
+    <%= link_to 'Back', regions_path, class: 'btn btn-outline-secondary' %>
+    <%= form.submit class: 'btn text-white', style: 'background-color: #0F0E47; border-color: #363636;' %>
   </div>
 <% end %>

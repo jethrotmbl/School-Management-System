@@ -1,24 +1,32 @@
-<p id="notice"><%= notice %></p>
+<div class="card page-card">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="section-title h3 mb-0"><%= @city.name %></h1>
+      <div>
+        <%= link_to 'Edit', edit_city_path(@city), class: 'btn btn-outline-brand' %>
+        <%= link_to 'Back', cities_path, class: 'btn btn-outline-secondary' %>
+      </div>
+    </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @city.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @city.description %>
-</p>
-
-<p>
-  <strong>Remarks:</strong>
-  <%= @city.remarks %>
-</p>
-
-<p>
-  <strong>Is municipality:</strong>
-  <%= @city.is_municipality %>
-</p>
-
-<%= link_to 'Edit', edit_city_path(@city) %> |
-<%= link_to 'Back', cities_path %>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <div class="muted-label">Description</div>
+        <div><%= @city.description.presence || "-" %></div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="muted-label">Remarks</div>
+        <div><%= @city.remarks.presence || "-" %></div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="muted-label">Type</div>
+        <div>
+          <% if @city.is_municipality %>
+            <span class="badge badge-municipality">Municipality</span>
+          <% else %>
+            <span class="badge badge-city">City</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

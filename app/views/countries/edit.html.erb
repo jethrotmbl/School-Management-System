@@ -1,6 +1,10 @@
-<h1>Editing Country</h1>
-
-<%= render 'form', country: @country %>
-
-<%= link_to 'Show', @country %> |
-<%= link_to 'Back', countries_path %>
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card page-card">
+      <div class="card-body">
+        <h1 class="section-title h3 mb-4">Edit Country</h1>
+        <%= render 'form', country: @country %>
+      </div>
+    </div>
+  </div>
+</div>

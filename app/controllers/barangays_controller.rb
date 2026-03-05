@@ -3,7 +3,7 @@ class BarangaysController < ApplicationController
 
   # GET /barangays or /barangays.json
   def index
-    @barangays = Barangay.all
+    @barangays = Barangay.order(:name).page(params[:page]).per(10)
   end
 
   # GET /barangays/1 or /barangays/1.json

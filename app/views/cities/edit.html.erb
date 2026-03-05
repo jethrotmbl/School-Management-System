@@ -1,6 +1,10 @@
-<h1>Editing City</h1>
-
-<%= render 'form', city: @city %>
-
-<%= link_to 'Show', @city %> |
-<%= link_to 'Back', cities_path %>
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card page-card">
+      <div class="card-body">
+        <h1 class="section-title h3 mb-4">Edit City</h1>
+        <%= render 'form', city: @city %>
+      </div>
+    </div>
+  </div>
+</div>

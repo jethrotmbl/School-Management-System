@@ -1,33 +1,51 @@
-<p id="notice"><%= notice %></p>
+<div class="card page-card">
+  <div class="card-header resource-card-header py-3 px-4">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <h1 class="section-title h3 mb-0">Cities</h1>
+      </div>
+      <%= link_to 'New City', new_city_path, class: 'btn text-white', style: 'background-color: #0F0E47; border-color: #363636;' %>
+    </div>
+  </div>
+  <div class="card-body pt-4">
+    <div>
+      <table class="table table-hover table-alt cities-table mb-0">
+        <thead>
+          <tr>
+            <th class="name-col">Name</th>
+            <th class="description-col">Description</th>
+            <th class="remarks-col">Remarks</th>
+            <th class="type-col">Type</th>
+            <th class="text-right actions-col">Actions</th>
+          </tr>
+        </thead>
 
-<h1>Cities</h1>
+        <tbody>
+          <% @cities.each do |city| %>
+            <tr>
+              <td class="font-weight-bold name-col"><span class="name-text"><%= city.name %></span></td>
+              <td class="description-col"><%= city.description.presence || "-" %></td>
+              <td class="remarks-col"><%= city.remarks.presence || "-" %></td>
+              <td class="type-col">
+                <% if city.is_municipality %>
+                  <span class="badge badge-municipality">Municipality</span>
+                <% else %>
+                  <span class="badge badge-city">City</span>
+                <% end %>
+              </td>
+              <td class="text-right actions-col">
+                <%= link_to 'View', city, class: 'btn btn-sm btn-outline-secondary' %>
+                <%= link_to 'Edit', edit_city_path(city), class: 'btn btn-sm btn-outline-brand' %>
+                <%= link_to 'Delete', city, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger' %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Remarks</th>
-      <th>Is municipality</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @cities.each do |city| %>
-      <tr>
-        <td><%= city.name %></td>
-        <td><%= city.description %></td>
-        <td><%= city.remarks %></td>
-        <td><%= city.is_municipality %></td>
-        <td><%= link_to 'Show', city %></td>
-        <td><%= link_to 'Edit', edit_city_path(city) %></td>
-        <td><%= link_to 'Destroy', city, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New City', new_city_path %>
+    <div class="pagination-wrap d-flex justify-content-center mt-4">
+      <%= paginate @cities, window: 2, outer_window: 0, left: 0, right: 0 %>
+    </div>
+  </div>
+</div>

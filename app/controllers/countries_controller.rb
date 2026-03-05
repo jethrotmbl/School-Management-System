@@ -3,7 +3,7 @@ class CountriesController < ApplicationController
 
   # GET /countries or /countries.json
   def index
-    @countries = Country.all
+    @countries = Country.order(:name).page(params[:page]).per(10)
   end
 
   # GET /countries/1 or /countries/1.json

@@ -3,7 +3,7 @@ class ProvincesController < ApplicationController
 
   # GET /provinces or /provinces.json
   def index
-    @provinces = Province.all
+    @provinces = Province.order(:name).page(params[:page]).per(10)
   end
 
   # GET /provinces/1 or /provinces/1.json

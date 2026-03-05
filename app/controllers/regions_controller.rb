@@ -3,7 +3,7 @@ class RegionsController < ApplicationController
 
   # GET /regions or /regions.json
   def index
-    @regions = Region.all
+    @regions = Region.order(:name).page(params[:page]).per(10)
   end
 
   # GET /regions/1 or /regions/1.json
