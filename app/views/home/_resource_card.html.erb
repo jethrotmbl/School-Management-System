@@ -1,7 +1,12 @@
 <article class="resource-card card">
   <div class="card-body d-flex flex-column">
-    <p class="resource-card__label">Resource</p>
-    <h2 class="resource-card__title"><%= card[:title] %></h2>
+    <div class="resource-card__header">
+      <span class="resource-card__icon" aria-hidden="true">
+        <%= bootstrap_icon(card[:icon], classes: "resource-card__icon-svg") %>
+      </span>
+      <h2 class="resource-card__title"><%= card[:title] %></h2>
+    </div>
+
     <p class="resource-card__text">
       Open the full <%= card[:title].downcase %> listing or create a new record from this dashboard.
     </p>

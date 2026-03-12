@@ -1,21 +1,29 @@
-<section class="home-hero">
-  <div class="home-hero__brand">
-    <div class="home-hero__logo" aria-hidden="true">
-      <%= bootstrap_icon("mortarboard-fill", classes: "home-hero__logo-icon") %>
-    </div>
-
-    <div>
-      <p class="home-hero__eyebrow">Academic Operations</p>
-      <h1 class="home-hero__title">School Management System</h1>
-      <p class="home-hero__subtitle">
-        Manage core location records from a single dashboard with direct access to each index and create page.
-      </p>
-    </div>
-  </div>
-</section>
-
 <section class="resource-grid" aria-label="System resources">
   <% @resource_cards.each do |card| %>
     <%= render "resource_card", card: card %>
   <% end %>
+</section>
+
+<section class="dashboard-summary card">
+  <div class="card-body">
+    <div class="dashboard-summary__header">
+      <h2 class="dashboard-summary__title">Statistics Overview</h2>
+      <p class="dashboard-summary__subtitle">Current totals across your core records.</p>
+    </div>
+
+    <div class="dashboard-summary__grid">
+      <% @resource_cards.each do |card| %>
+        <div class="dashboard-summary__item">
+          <div class="dashboard-summary__item-head">
+            <span class="dashboard-summary__icon" aria-hidden="true">
+              <%= bootstrap_icon(card[:icon], classes: "dashboard-summary__icon-svg") %>
+            </span>
+            <span class="dashboard-summary__label"><%= card[:title] %></span>
+          </div>
+          <div class="dashboard-summary__value"><%= card[:count] %></div>
+          <div class="dashboard-summary__meta"><%= resource_stat_label(card[:count]) %></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </section>

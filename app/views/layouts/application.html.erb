@@ -22,16 +22,18 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="mainNavigation">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item <%= 'active' if controller_name == 'home' %>"><%= link_to "Home", root_path, class: "nav-link" %></li>
-            <li class="nav-item <%= 'active' if controller_name == 'countries' %>"><%= link_to "Countries", countries_path, class: "nav-link" %></li>
-            <li class="nav-item <%= 'active' if controller_name == 'regions' %>"><%= link_to "Regions", regions_path, class: "nav-link" %></li>
-            <li class="nav-item <%= 'active' if controller_name == 'provinces' %>"><%= link_to "Provinces", provinces_path, class: "nav-link" %></li>
-            <li class="nav-item <%= 'active' if controller_name == 'cities' %>"><%= link_to "Cities", cities_path, class: "nav-link" %></li>
-            <li class="nav-item <%= 'active' if controller_name == 'barangays' %>"><%= link_to "Barangays", barangays_path, class: "nav-link" %></li>
-          </ul>
-        </div>
+        <% unless controller_name == "home" %>
+          <div class="collapse navbar-collapse" id="mainNavigation">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item <%= 'active' if controller_name == 'home' %>"><%= link_to "Home", root_path, class: "nav-link" %></li>
+              <li class="nav-item <%= 'active' if controller_name == 'countries' %>"><%= link_to "Countries", countries_path, class: "nav-link" %></li>
+              <li class="nav-item <%= 'active' if controller_name == 'regions' %>"><%= link_to "Regions", regions_path, class: "nav-link" %></li>
+              <li class="nav-item <%= 'active' if controller_name == 'provinces' %>"><%= link_to "Provinces", provinces_path, class: "nav-link" %></li>
+              <li class="nav-item <%= 'active' if controller_name == 'cities' %>"><%= link_to "Cities", cities_path, class: "nav-link" %></li>
+              <li class="nav-item <%= 'active' if controller_name == 'barangays' %>"><%= link_to "Barangays", barangays_path, class: "nav-link" %></li>
+            </ul>
+          </div>
+        <% end %>
       </div>
     </nav>
 
@@ -47,5 +49,25 @@
 
       <%= yield %>
     </main>
+
+    <footer class="app-footer mt-auto">
+      <div class="container app-footer__content">
+        <nav class="app-footer__nav" aria-label="Footer">
+          <%= link_to "About", "#", class: "app-footer__link" %>
+          <%= link_to "Contact", "#", class: "app-footer__link" %>
+          <%= link_to "Services", "#", class: "app-footer__link" %>
+          <%= link_to "Support", "#", class: "app-footer__link" %>
+          <%= link_to "Privacy", "#", class: "app-footer__link" %>
+          <%= link_to "Terms", "#", class: "app-footer__link" %>
+        </nav>
+        <div class="app-footer__brand">
+          <span class="app-footer__brand-icon" aria-hidden="true">
+            <%= bootstrap_icon("mortarboard-fill", classes: "app-footer__brand-svg") %>
+          </span>
+          <p class="app-footer__title">School Management System</p>
+        </div>
+        <p class="app-footer__text">All Rights Reserved 2026</p>
+      </div>
+    </footer>
   </body>
 </html>

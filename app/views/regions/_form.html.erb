@@ -1,4 +1,5 @@
 <%= form_with(model: region, local: true) do |form| %>
+  <%= hidden_field_tag :return_to, params[:return_to] if params[:return_to].present? %>
   <% if region.errors.any? %>
     <div class="alert alert-danger">
       <strong><%= pluralize(region.errors.count, "error") %> prohibited this region from being saved:</strong>
@@ -33,7 +34,7 @@
   </div>
 
   <div class="d-flex justify-content-between mt-4">
-    <%= link_to 'Back', regions_path, class: 'btn btn-outline-secondary' %>
+    <%= link_to 'Back', safe_return_path(regions_path), class: 'btn btn-outline-secondary' %>
     <%= form.submit class: 'btn text-white', style: 'background-color: #0F0E47; border-color: #363636;' %>
   </div>
 
