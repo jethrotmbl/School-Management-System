@@ -3,7 +3,7 @@ class CitiesController < ApplicationController
 
   # GET /cities or /cities.json
   def index
-    @cities = City.order(:name).page(params[:page]).per(10)
+    @cities = City.includes(province: { region: :country }).order(:name).page(params[:page]).per(10)
   end
 
   # GET /cities/1 or /cities/1.json
@@ -65,6 +65,6 @@ class CitiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def city_params
-      params.require(:city).permit(:name, :description, :remarks, :is_municipality)
+      params.require(:city).permit(:name, :description, :remarks, :is_municipality, :province_id)
     end
 end

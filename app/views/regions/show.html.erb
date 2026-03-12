@@ -10,6 +10,10 @@
 
     <div class="row">
       <div class="col-md-6 mb-3">
+        <div class="muted-label">Country</div>
+        <div><%= @region.country&.name || "-" %></div>
+      </div>
+      <div class="col-md-6 mb-3">
         <div class="muted-label">Description</div>
         <div><%= @region.description.presence || "-" %></div>
       </div>

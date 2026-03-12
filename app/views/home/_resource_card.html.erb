@@ -1,0 +1,14 @@
+<article class="resource-card card">
+  <div class="card-body d-flex flex-column">
+    <p class="resource-card__label">Resource</p>
+    <h2 class="resource-card__title"><%= card[:title] %></h2>
+    <p class="resource-card__text">
+      Open the full <%= card[:title].downcase %> listing or create a new record from this dashboard.
+    </p>
+
+    <div class="resource-card__actions mt-auto">
+      <%= link_to card[:index_label], card[:index_path], class: "btn btn-outline-brand resource-card__button" %>
+      <%= link_to card[:create_label], card[:new_path], class: "btn btn-brand resource-card__button" %>
+    </div>
+  </div>
+</article>

@@ -16,6 +16,13 @@
   </div>
 
   <div class="form-group">
+    <%= form.label :city_id, "City" %>
+    <%= form.collection_select :city_id, City.order(:name), :id, :name,
+        { include_blank: "-- Choose none --" },
+        { class: "form-control" } %>
+  </div>
+
+  <div class="form-group">
     <%= form.label :description, class: "font-weight-bold" %>
     <%= form.text_area :description, rows: 4, class: "form-control", placeholder: "Short description" %>
   </div>
@@ -27,6 +34,7 @@
 
   <div class="d-flex justify-content-between mt-4">
     <%= link_to 'Back', barangays_path, class: 'btn btn-outline-secondary' %>
-    <%= form.submit 'Create Barangay', class: 'btn text-white', style: 'background-color: #0F0E47; border-color: #363636;' %>
+    <%= form.submit 'Update Barangay', class: 'btn text-white', style: 'background-color: #0F0E47; border-color: #363636;' %>
   </div>
+
 <% end %>

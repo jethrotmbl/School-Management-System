@@ -13,6 +13,7 @@
         <thead>
           <tr>
             <th class="name-col">Name</th>
+            <th class="name-col">Location</th>
             <th class="description-col">Description</th>
             <th class="remarks-col">Remarks</th>
             <th class="text-right actions-col">Actions</th>
@@ -23,6 +24,9 @@
           <% @barangays.each do |barangay| %>
             <tr>
               <td class="font-weight-bold name-col"><span class="name-text"><%= barangay.name %></span></td>
+              <td class="name-col">
+                <%= [barangay.city&.province&.region&.country&.name, barangay.city&.province&.region&.name, barangay.city&.province&.name, barangay.city&.name].compact.join(" > ").presence || "-" %>
+              </td>
               <td class="description-col"><%= barangay.description.presence || "-" %></td>
               <td class="remarks-col"><%= barangay.remarks.presence || "-" %></td>
               <td class="text-right actions-col">

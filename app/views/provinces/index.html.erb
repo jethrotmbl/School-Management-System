@@ -13,6 +13,7 @@
         <thead>
           <tr>
             <th class="name-col">Name</th>
+            <th class="name-col">Region</th>
             <th class="description-col">Description</th>
             <th class="remarks-col">Remarks</th>
             <th class="text-right actions-col">Actions</th>
@@ -23,6 +24,7 @@
           <% @provinces.each do |province| %>
             <tr>
               <td class="font-weight-bold name-col"><span class="name-text"><%= province.name %></span></td>
+              <td class="name-col"><%= province.region&.name || "-" %></td>
               <td class="description-col"><%= province.description.presence || "-" %></td>
               <td class="remarks-col"><%= province.remarks.presence || "-" %></td>
               <td class="text-right actions-col">

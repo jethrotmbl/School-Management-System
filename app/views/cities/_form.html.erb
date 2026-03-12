@@ -16,6 +16,13 @@
   </div>
 
   <div class="form-group">
+    <%= form.label :province_id, "Province" %>
+    <%= form.collection_select :province_id, Province.order(:name), :id, :name,
+        { include_blank: "-- Choose none --" },
+        { class: "form-control" } %>
+  </div>
+
+  <div class="form-group">
     <%= form.label :description, class: "font-weight-bold" %>
     <%= form.text_area :description, rows: 4, class: "form-control", placeholder: "Short description" %>
   </div>
@@ -34,4 +41,5 @@
     <%= link_to 'Back', cities_path, class: 'btn btn-outline-secondary' %>
     <%= form.submit class: 'btn text-white', style: 'background-color: #0F0E47; border-color: #363636;' %>
   </div>
+
 <% end %>

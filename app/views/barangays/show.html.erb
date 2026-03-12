@@ -9,6 +9,14 @@
     </div>
 
     <div class="row">
+      <% city = @barangay.city %>
+      <% province = city&.province %>
+      <% region = province&.region %>
+      <% country = region&.country %>
+      <div class="col-md-12 mb-3">
+        <div class="muted-label">Location</div>
+        <div><%= [country&.name, region&.name, province&.name, city&.name].compact.join(" > ").presence || "-" %></div>
+      </div>
       <div class="col-md-6 mb-3">
         <div class="muted-label">Description</div>
         <div><%= @barangay.description.presence || "-" %></div>

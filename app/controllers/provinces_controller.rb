@@ -3,7 +3,7 @@ class ProvincesController < ApplicationController
 
   # GET /provinces or /provinces.json
   def index
-    @provinces = Province.order(:name).page(params[:page]).per(10)
+    @provinces = Province.includes(region: :country).order(:name).page(params[:page]).per(10)
   end
 
   # GET /provinces/1 or /provinces/1.json
@@ -65,6 +65,6 @@ class ProvincesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def province_params
-      params.require(:province).permit(:name, :description, :remarks)
+      params.require(:province).permit(:name, :description, :remarks, :region_id)
     end
 end
