@@ -1,0 +1,46 @@
+body.app-body {
+  background: linear-gradient(180deg, #f3f5f8 0%, #eef2f7 100%);
+  color: #1f2937;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title {
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  margin-bottom: 0;
+}
+
+.muted-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+}
+
+.btn.btn-outline-brand {
+  background-color: transparent !important;
+  border-color: #0f0e47;
+  color: #0f0e47;
+}
+
+.btn.btn-outline-brand:hover,
+.btn.btn-outline-brand:focus,
+.btn.btn-outline-brand:active {
+  background-color: #0f0e47 !important;
+  border-color: #0f0e47;
+  color: #ffffff;
+}
+
+.badge-city {
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  color: #1f2937 !important;
+}
+
+.badge-municipality {
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  color: #1f2937 !important;
+}

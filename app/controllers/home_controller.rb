@@ -2,9 +2,9 @@ class HomeController < ApplicationController
   RESOURCE_DEFINITIONS = [
     { key: :countries, model: Country, icon: "globe2" },
     { key: :regions, model: Region, icon: "diagram-3-fill" },
-    { key: :provinces, model: Province, icon: "signpost-2-fill" },
+    { key: :provinces, model: Province, icon: "geo-alt-fill" },
     { key: :cities, model: City, icon: "building" },
-    { key: :barangays, model: Barangay, icon: "pin-map-fill" }
+    { key: :barangays, model: Barangay, icon: "map" }
   ].freeze
 
   def index
