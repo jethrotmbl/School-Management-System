@@ -4,7 +4,8 @@
       <div>
         <h1 class="section-title h3 mb-0">Countries</h1>
       </div>
-      <%= link_to 'New Country', new_country_path, class: 'btn text-white', style: 'background-color: #0F0E47; border-color: #363636;' %>
+      <%= link_to 'New Country', new_country_path, class: 'btn text-white', 
+                                                    style: 'background-color: #0F0E47; border-color: #363636;' %>
     </div>
   </div>
   <div class="card-body pt-4">
@@ -28,7 +29,8 @@
               <td class="text-right actions-col">
                 <%= link_to 'View', country, class: 'btn btn-sm btn-outline-secondary' %>
                 <%= link_to 'Edit', edit_country_path(country), class: 'btn btn-sm btn-outline-brand' %>
-                <%= link_to 'Delete', country, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger' %>
+                <%= link_to 'Delete', country, method: :delete, data: { confirm: 'Are you sure?' }, 
+                                                                        class: 'btn btn-sm btn-outline-danger' %>
               </td>
             </tr>
           <% end %>

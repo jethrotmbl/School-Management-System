@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_03_05_083338) do
+ActiveRecord::Schema.define(version: 2026_03_19_090000) do
 
   create_table "barangays", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 2026_03_05_083338) do
     t.datetime "updated_at", null: false
     t.bigint "city_id"
     t.index ["city_id"], name: "index_barangays_on_city_id"
+  end
+
+  create_table "card_actions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "homepage_card_id"
+    t.string "label"
+    t.string "path"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["homepage_card_id"], name: "index_card_actions_on_homepage_card_id"
   end
 
   create_table "cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -39,6 +48,14 @@ ActiveRecord::Schema.define(version: 2026_03_05_083338) do
     t.text "remarks"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "homepage_cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.string "icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "description"
   end
 
   create_table "provinces", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -62,6 +79,7 @@ ActiveRecord::Schema.define(version: 2026_03_05_083338) do
   end
 
   add_foreign_key "barangays", "cities"
+  add_foreign_key "card_actions", "homepage_cards"
   add_foreign_key "cities", "provinces"
   add_foreign_key "provinces", "regions"
   add_foreign_key "regions", "countries"

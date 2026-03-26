@@ -3,7 +3,10 @@ class CitiesController < ApplicationController
 
   # GET /cities or /cities.json
   def index
-    @cities = City.includes(province: { region: :country }).order(:name).page(params[:page]).per(10)
+    @cities = City.includes(province: { region: :country })
+                  .order(:name)
+                  .page(params[:page])
+                  .per(10)
   end
 
   # GET /cities/1 or /cities/1.json

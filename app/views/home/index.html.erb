@@ -13,15 +13,16 @@
 
     <div class="dashboard-summary__grid">
       <% @resource_cards.each do |card| %>
+        <% count = @counts[card.title] || 0 %>
         <div class="dashboard-summary__item">
           <div class="dashboard-summary__item-head">
             <span class="dashboard-summary__icon" aria-hidden="true">
-              <%= bootstrap_icon(card[:icon], classes: "dashboard-summary__icon-svg") %>
+              <%= bootstrap_icon(card.icon, classes: "dashboard-summary__icon-svg") %>
             </span>
-            <span class="dashboard-summary__label"><%= card[:title] %></span>
+            <span class="dashboard-summary__label"><%= card.title %></span>
           </div>
-          <div class="dashboard-summary__value"><%= card[:count] %></div>
-          <div class="dashboard-summary__meta"><%= resource_stat_label(card[:count]) %></div>
+          <div class="dashboard-summary__value"><%= count %></div>
+          <div class="dashboard-summary__meta"><%= pluralize(count, "record") %> total</div>
         </div>
       <% end %>
     </div>
