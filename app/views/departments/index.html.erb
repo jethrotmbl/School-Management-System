@@ -1,0 +1,10 @@
+<%
+  columns = [
+    { title: "Code", class: "font-weight-bold", value: ->(department) { department.code.presence || "-" } },
+    { title: "Department", class: "font-weight-bold", value: ->(department) { department.name } },
+    { title: "Description", class: "", value: ->(department) { department.description.presence || "-" } },
+    { title: "Teachers", class: "", value: ->(department) { department.teachers.count } },
+    { title: "Actions", class: "text-right", html: ->(department) { resource_grid_actions(department, view_path: department_path(department), edit_path: edit_department_path(department), delete_path: department_path(department)) } }
+  ]
+%>
+<%= render "layouts/resource_index_grid", title: "Departments", new_label: "New Department", new_path: new_department_path, collection: @departments, columns: columns, grid_id: "departments-grid" %>

@@ -1,55 +1,55 @@
-<div class="card page-card">
-  <div class="card-header resource-card-header py-3 px-4">
-    <div class="d-flex justify-content-between align-items-center">
-      <div>
-        <h1 class="section-title h3 mb-0">Cities</h1>
-      </div>
-      <%= link_to 'New City', new_city_path, class: 'btn text-white', 
-                                              style: 'background-color: #0F0E47; border-color: #363636;' %>
-    </div>
-  </div>
-  <div class="card-body pt-4">
-    <div>
-      <table class="table table-hover table-alt cities-table mb-0">
-        <thead>
-          <tr>
-            <th class="name-col">Name</th>
-            <th class="name-col">Province</th>
-            <th class="description-col">Description</th>
-            <th class="remarks-col">Remarks</th>
-            <th class="type-col">Type</th>
-            <th class="text-right actions-col">Actions</th>
-          </tr>
-        </thead>
+<%
+  columns = [
+    {
+      title: "Name",
+      class: "name-col font-weight-bold",
+      html: ->(city) { content_tag(:span, city.name, class: "name-text") }
+    },
+    {
+      title: "Province",
+      class: "name-col",
+      value: ->(city) { city.province&.name || "-" }
+    },
+    {
+      title: "Description",
+      class: "description-col",
+      value: ->(city) { city.description.presence || "-" }
+    },
+    {
+      title: "Remarks",
+      class: "remarks-col",
+      value: ->(city) { city.remarks.presence || "-" }
+    },
+    {
+      title: "Type",
+      class: "type-col",
+      html: lambda { |city|
+        if city.is_municipality
+          content_tag(:span, "Municipality", class: "badge badge-municipality")
+        else
+          content_tag(:span, "City", class: "badge badge-city")
+        end
+      }
+    },
+    {
+      title: "Actions",
+      class: "actions-col text-right",
+      html: lambda { |city|
+        resource_grid_actions(
+          city,
+          view_path: city_path(city),
+          edit_path: edit_city_path(city),
+          delete_path: city_path(city)
+        )
+      }
+    }
+  ]
+%>
 
-        <tbody>
-          <% @cities.each do |city| %>
-            <tr>
-              <td class="font-weight-bold name-col"><span class="name-text"><%= city.name %></span></td>
-              <td class="name-col"><%= city.province&.name || "-" %></td>
-              <td class="description-col"><%= city.description.presence || "-" %></td>
-              <td class="remarks-col"><%= city.remarks.presence || "-" %></td>
-              <td class="type-col">
-                <% if city.is_municipality %>
-                  <span class="badge badge-municipality">Municipality</span>
-                <% else %>
-                  <span class="badge badge-city">City</span>
-                <% end %>
-              </td>
-              <td class="text-right actions-col">
-                <%= link_to 'View', city, class: 'btn btn-sm btn-outline-secondary' %>
-                <%= link_to 'Edit', edit_city_path(city), class: 'btn btn-sm btn-outline-brand' %>
-                <%= link_to 'Delete', city, method: :delete, data: { confirm: 'Are you sure?' }, 
-                                                                      class: 'btn btn-sm btn-outline-danger' %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="pagination-wrap d-flex justify-content-center mt-4">
-      <%= paginate @cities, window: 2, outer_window: 0, left: 0, right: 0 %>
-    </div>
-  </div>
-</div>
+<%= render "layouts/resource_index_grid",
+           title: "Cities",
+           new_label: "New City",
+           new_path: new_city_path,
+           collection: @cities,
+           columns: columns,
+           grid_id: "cities-grid" %>

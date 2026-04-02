@@ -1,0 +1,10 @@
+<%
+  columns = [
+    { title: "Code", class: "font-weight-bold", value: ->(field) { field.code.presence || "-" } },
+    { title: "Field of Study", class: "font-weight-bold", value: ->(field) { field.name } },
+    { title: "Degree", class: "", value: ->(field) { field.degree&.name || "-" } },
+    { title: "Classes", class: "", value: ->(field) { field.academic_classes.count } },
+    { title: "Actions", class: "text-right", html: ->(field) { resource_grid_actions(field, view_path: field_of_study_path(field), edit_path: edit_field_of_study_path(field), delete_path: field_of_study_path(field)) } }
+  ]
+%>
+<%= render "layouts/resource_index_grid", title: "Field of Study", new_label: "New Field", new_path: new_field_of_study_path, collection: @field_of_studies, columns: columns, grid_id: "field-of-studies-grid" %>

@@ -1,0 +1,10 @@
+<%
+  columns = [
+    { title: "Code", class: "font-weight-bold", value: ->(degree) { degree.code.presence || "-" } },
+    { title: "Degree", class: "font-weight-bold", value: ->(degree) { degree.name } },
+    { title: "Fields", class: "", value: ->(degree) { degree.field_of_studies.count } },
+    { title: "Classes", class: "", value: ->(degree) { degree.academic_classes.count } },
+    { title: "Actions", class: "text-right", html: ->(degree) { resource_grid_actions(degree, view_path: degree_path(degree), edit_path: edit_degree_path(degree), delete_path: degree_path(degree)) } }
+  ]
+%>
+<%= render "layouts/resource_index_grid", title: "Degrees", new_label: "New Degree", new_path: new_degree_path, collection: @degrees, columns: columns, grid_id: "degrees-grid" %>

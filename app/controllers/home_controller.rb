@@ -1,12 +1,8 @@
 class HomeController < ApplicationController
   def index
-    @resource_cards = HomepageCard.includes(:card_actions).order(:id)
-    @counts = {
-      "Countries" => Country.count,
-      "Regions" => Region.count,
-      "Provinces" => Province.count,
-      "Cities" => City.count,
-      "Barangays" => Barangay.count
-    }
+    dashboard = HomeDashboard.new
+    dashboard.load
+    @resource_cards = dashboard.resource_cards
+    @summary_items = dashboard.summary_items
   end
 end

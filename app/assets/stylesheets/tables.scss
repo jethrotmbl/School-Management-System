@@ -192,7 +192,7 @@
   }
 
   .actions-col {
-    width: auto !important;
+    width: auto;
     min-width: 0;
     white-space: normal;
   }
@@ -210,20 +210,20 @@
 
   .cities-table th,
   .cities-table td {
-    width: 20% !important;
+    width: 20%;
   }
 
   .barangays-table th,
   .barangays-table td {
-    width: 25% !important;
+    width: 25%;
   }
 
   .cities-table .actions-col,
   .barangays-table .actions-col {
-    width: auto !important;
+    width: auto;
     min-width: 0;
     white-space: normal;
-    text-align: left !important;
+    text-align: left;
   }
 
   .actions-col .btn {

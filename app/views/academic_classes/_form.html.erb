@@ -1,0 +1,25 @@
+<%= form_with(model: academic_class, local: true) do |form| %>
+  <% if academic_class.errors.any? %><div class="alert alert-danger"><%= academic_class.errors.full_messages.to_sentence %></div><% end %>
+  <div class="row">
+    <div class="col-md-4 form-group"><%= form.label :class_code, class: "font-weight-bold" %><%= form.text_field :class_code, class: "form-control" %></div>
+    <div class="col-md-4 form-group"><%= form.label :title, class: "font-weight-bold" %><%= form.text_field :title, class: "form-control" %></div>
+    <div class="col-md-4 form-group"><%= form.label :units, class: "font-weight-bold" %><%= form.number_field :units, step: 0.5, class: "form-control" %></div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 form-group"><%= form.label :teacher_id, "Teacher", class: "font-weight-bold" %><%= form.collection_select :teacher_id, @teachers, :id, :full_name, { include_blank: "Select teacher" }, class: "form-control" %></div>
+    <div class="col-md-4 form-group"><%= form.label :school_year_id, "School Year", class: "font-weight-bold" %><%= form.collection_select :school_year_id, @school_years, :id, :name, { include_blank: "Select school year" }, class: "form-control" %></div>
+    <div class="col-md-4 form-group"><%= form.label :enrollment_period_id, "Enrollment Period", class: "font-weight-bold" %><%= form.collection_select :enrollment_period_id, @enrollment_periods, :id, :name, { include_blank: "Select enrollment period" }, class: "form-control" %></div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 form-group"><%= form.label :degree_id, "Degree", class: "font-weight-bold" %><%= form.collection_select :degree_id, @degrees, :id, :name, { include_blank: "Select degree" }, class: "form-control" %></div>
+    <div class="col-md-6 form-group"><%= form.label :field_of_study_id, "Field of Study", class: "font-weight-bold" %><%= form.collection_select :field_of_study_id, @field_of_studies, :id, :name, { include_blank: "Select field of study" }, class: "form-control" %></div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 form-group"><%= form.label :section, class: "font-weight-bold" %><%= form.text_field :section, class: "form-control" %></div>
+    <div class="col-md-4 form-group"><%= form.label :room, class: "font-weight-bold" %><%= form.text_field :room, class: "form-control" %></div>
+    <div class="col-md-4 form-group"><%= form.label :status, class: "font-weight-bold" %><%= form.select :status, AcademicClass::STATUSES.map { |status| [status.titleize, status] }, {}, class: "form-control" %></div>
+  </div>
+  <div class="form-group"><%= form.label :schedule, class: "font-weight-bold" %><%= form.text_field :schedule, class: "form-control" %></div>
+  <div class="form-group"><%= form.label :description, class: "font-weight-bold" %><%= form.text_area :description, rows: 4, class: "form-control" %></div>
+  <div class="d-flex justify-content-between mt-4"><%= link_to "Back", academic_classes_path, class: "btn btn-outline-secondary" %><%= form.submit class: "btn text-white", style: "background-color: #0F0E47; border-color: #0F0E47;" %></div>
+<% end %>

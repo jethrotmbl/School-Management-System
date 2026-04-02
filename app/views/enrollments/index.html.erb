@@ -1,0 +1,10 @@
+<%
+  columns = [
+    { title: "Student", class: "font-weight-bold", value: ->(enrollment) { enrollment.student.full_name } },
+    { title: "Class", class: "", value: ->(enrollment) { enrollment.academic_class.display_name } },
+    { title: "School Year", class: "", value: ->(enrollment) { enrollment.school_year.name } },
+    { title: "Status", class: "", value: ->(enrollment) { enrollment.status.titleize } },
+    { title: "Actions", class: "text-right", html: ->(enrollment) { resource_grid_actions(enrollment, view_path: enrollment_path(enrollment), edit_path: edit_enrollment_path(enrollment), delete_path: enrollment_path(enrollment)) } }
+  ]
+%>
+<%= render "layouts/resource_index_grid", title: "Enrollments", new_label: "New Enrollment", new_path: new_enrollment_path, collection: @enrollments, columns: columns, grid_id: "enrollments-grid" %>

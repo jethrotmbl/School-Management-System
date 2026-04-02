@@ -1,0 +1,126 @@
+.resource-grid__create-button {
+  background: linear-gradient(135deg, #0f0e47 0%, #1f3b73 100%);
+  border: 0;
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(15, 14, 71, 0.18);
+  font-weight: 600;
+  padding: 0.65rem 1.1rem;
+}
+
+.resource-grid__create-button:hover,
+.resource-grid__create-button:focus,
+.resource-grid__create-button:active {
+  background: linear-gradient(135deg, #11105a 0%, #244887 100%);
+  color: #ffffff;
+}
+
+.resource-grid-shell {
+  overflow: hidden;
+  border: 1px solid #d7deea;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.resource-grid-shell .k-grid {
+  border: 0;
+  background: transparent;
+}
+
+.resource-grid-shell .k-grid-header {
+  background: linear-gradient(180deg, #eef4ff 0%, #e6eefb 100%);
+  border-bottom: 1px solid #d7deea;
+}
+
+.resource-grid-shell .k-grouping-header {
+  background: linear-gradient(180deg, #f8fbff 0%, #edf4ff 100%);
+  border-bottom: 1px solid #d7deea;
+  color: #47607b;
+  font-size: 0.92rem;
+  padding: 0.9rem 1rem;
+}
+
+.resource-grid-shell .k-grouping-header .k-group-indicator {
+  border-color: #c8d7ea;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 6px 12px rgba(31, 59, 115, 0.08);
+}
+
+.resource-grid-shell .k-grid-header .k-header {
+  border-color: transparent;
+  background: transparent;
+  color: #526377;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.resource-grid-shell .k-grid-content {
+  background: transparent;
+}
+
+.resource-grid-shell .k-grid tbody tr {
+  border-color: #e7edf5;
+}
+
+.resource-grid-shell .k-grid tbody tr:nth-child(even) {
+  background: #f7faff;
+}
+
+.resource-grid-shell .k-grid tbody tr:hover {
+  background: #edf4ff;
+}
+
+.resource-grid-shell .k-grid td {
+  border-color: #e7edf5;
+  color: #223045;
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+  vertical-align: middle;
+}
+
+.resource-grid-shell .name-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.35;
+  padding-bottom: 0.08em;
+}
+
+.resource-grid-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  flex-wrap: nowrap;
+}
+
+.resource-grid-actions .btn {
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 768px) {
+  .resource-grid__create-button {
+    margin-top: 0.85rem;
+    width: 100%;
+  }
+
+  .resource-grid-shell {
+    border-radius: 14px;
+  }
+
+  .resource-grid-actions {
+    justify-content: stretch;
+    flex-wrap: wrap;
+  }
+
+  .resource-grid-actions .btn {
+    width: 100%;
+  }
+}

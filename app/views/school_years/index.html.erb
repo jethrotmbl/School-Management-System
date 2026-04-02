@@ -1,0 +1,17 @@
+<%
+  columns = [
+    { title: "School Year", class: "font-weight-bold", value: ->(school_year) { school_year.name } },
+    { title: "Date Range", class: "", value: ->(school_year) { school_year.date_range } },
+    { title: "Status", class: "", value: ->(school_year) { school_year.status.titleize } },
+    { title: "Classes", class: "", value: ->(school_year) { school_year.academic_classes.count } },
+    { title: "Actions", class: "text-right", html: lambda { |school_year|
+      safe_join([
+        link_to("View", school_year_path(school_year), class: "btn btn-sm btn-outline-secondary"),
+        link_to("Edit", edit_school_year_path(school_year), class: "btn btn-sm btn-outline-brand"),
+        (school_year.status == "open" ? "".html_safe : link_to("Open", open_school_year_path(school_year), method: :patch, class: "btn btn-sm btn-success")),
+        link_to("Delete", school_year_path(school_year), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger")
+      ])
+    } }
+  ]
+%>
+<%= render "layouts/resource_index_grid", title: "School Years", new_label: "New School Year", new_path: new_school_year_path, collection: @school_years, columns: columns, grid_id: "school-years-grid" %>

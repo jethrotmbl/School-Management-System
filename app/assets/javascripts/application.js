@@ -14,6 +14,7 @@
 //= require activestorage
 //= require turbolinks
 //= require jquery.min
+//= require kendo.all.min
 //= require popper.min
 //= require bootstrap.min
 //= require action_cable

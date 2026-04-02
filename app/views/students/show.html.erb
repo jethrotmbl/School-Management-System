@@ -1,0 +1,60 @@
+<div class="card page-card mb-4">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+      <div>
+        <div class="muted-label">Student Profile</div>
+        <h1 class="section-title h3 mb-0"><%= @student.full_name %></h1>
+        <div class="text-muted mt-1"><%= @student.student_number %></div>
+      </div>
+      <div class="d-flex gap-2">
+        <%= link_to "Edit", edit_student_path(@student), class: "btn btn-outline-brand" %>
+        <%= link_to "Back", students_path, class: "btn btn-outline-secondary" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 mb-3"><div class="muted-label">Status</div><div><%= @student.status.titleize %></div></div>
+      <div class="col-md-3 mb-3"><div class="muted-label">Birth Date</div><div><%= @student.birth_date&.strftime("%b %d, %Y") || "-" %></div></div>
+      <div class="col-md-3 mb-3"><div class="muted-label">Gender</div><div><%= @student.gender.presence&.titleize || "-" %></div></div>
+      <div class="col-md-3 mb-3"><div class="muted-label">Citizenship</div><div><%= @student.citizenship&.name || "-" %></div></div>
+      <div class="col-md-6 mb-3"><div class="muted-label">Email</div><div><%= @student.email.presence || "-" %></div></div>
+      <div class="col-md-6 mb-3"><div class="muted-label">Phone</div><div><%= @student.phone.presence || "-" %></div></div>
+      <div class="col-md-12 mb-3"><div class="muted-label">Address</div><div><%= @student.address_line.presence || "-" %></div></div>
+      <div class="col-md-12 mb-3"><div class="muted-label">Location</div><div><%= @student.location_name.presence || "-" %></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6 mb-4">
+    <div class="card page-card h-100"><div class="card-body"><h2 class="section-title h5 mb-3">Guardians</h2><% if @linked_guardians.any? %><% @linked_guardians.each do |guardian| %><div class="admin-related-item"><div class="font-weight-bold"><%= link_to guardian.full_name, guardian_path(guardian) %></div><div class="text-muted small"><%= guardian.relationship_to_student.presence || guardian.phone.presence || "-" %></div></div><% end %><% else %><div class="text-muted">No guardians assigned.</div><% end %></div></div>
+  </div>
+  <div class="col-lg-6 mb-4">
+    <div class="card page-card h-100"><div class="card-body"><h2 class="section-title h5 mb-3">Teachers</h2><% if @linked_teachers.any? %><% @linked_teachers.each do |teacher| %><div class="admin-related-item"><div class="font-weight-bold"><%= link_to teacher.full_name, teacher_path(teacher) %></div><div class="text-muted small"><%= teacher.department&.name || teacher.specialization.presence || "-" %></div></div><% end %><% else %><div class="text-muted">No teachers linked through current classes.</div><% end %></div></div>
+  </div>
+</div>
+
+<div class="card page-card">
+  <div class="card-body">
+    <h2 class="section-title h5 mb-3">Current Enrollments</h2>
+    <% if @current_enrollments.any? %>
+      <div class="table-responsive">
+        <table class="table mb-0">
+          <thead><tr><th>Class</th><th>Teacher</th><th>School Year</th><th>Status</th></tr></thead>
+          <tbody>
+            <% @current_enrollments.each do |enrollment| %>
+              <tr>
+                <td><%= link_to enrollment.academic_class.display_name, academic_class_path(enrollment.academic_class) %></td>
+                <td><%= enrollment.academic_class.teacher&.full_name || "-" %></td>
+                <td><%= enrollment.school_year.name %></td>
+                <td><%= enrollment.status.titleize %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="text-muted">No enrollments found.</div>
+    <% end %>
+  </div>
+</div>

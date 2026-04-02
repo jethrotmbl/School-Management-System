@@ -1,0 +1,33 @@
+<%= form_with(model: teacher, local: true) do |form| %>
+  <% if teacher.errors.any? %>
+    <div class="alert alert-danger"><%= teacher.errors.full_messages.to_sentence %></div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-4 form-group"><%= form.label :employee_number, class: "font-weight-bold" %><%= form.text_field :employee_number, class: "form-control", placeholder: "Leave blank to auto-generate" %></div>
+    <div class="col-md-4 form-group"><%= form.label :department_id, "Department", class: "font-weight-bold" %><%= form.collection_select :department_id, @departments, :id, :name, { include_blank: "Select department" }, class: "form-control" %></div>
+    <div class="col-md-4 form-group"><%= form.label :citizenship_id, "Citizenship", class: "font-weight-bold" %><%= form.collection_select :citizenship_id, @citizenships, :id, :name, { include_blank: "Select citizenship" }, class: "form-control" %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 form-group"><%= form.label :first_name, class: "font-weight-bold" %><%= form.text_field :first_name, class: "form-control" %></div>
+    <div class="col-md-3 form-group"><%= form.label :middle_name, class: "font-weight-bold" %><%= form.text_field :middle_name, class: "form-control" %></div>
+    <div class="col-md-3 form-group"><%= form.label :last_name, class: "font-weight-bold" %><%= form.text_field :last_name, class: "form-control" %></div>
+    <div class="col-md-3 form-group"><%= form.label :suffix, class: "font-weight-bold" %><%= form.text_field :suffix, class: "form-control" %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 form-group"><%= form.label :email, class: "font-weight-bold" %><%= form.email_field :email, class: "form-control" %></div>
+    <div class="col-md-4 form-group"><%= form.label :phone, class: "font-weight-bold" %><%= form.text_field :phone, class: "form-control" %></div>
+    <div class="col-md-4 form-group"><%= form.label :hire_date, class: "font-weight-bold" %><%= form.date_field :hire_date, class: "form-control" %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 form-group"><%= form.label :specialization, class: "font-weight-bold" %><%= form.text_field :specialization, class: "form-control" %></div>
+    <div class="col-md-6 form-group"><%= form.label :status, class: "font-weight-bold" %><%= form.select :status, Teacher::STATUSES.map { |status| [status.titleize, status] }, {}, class: "form-control" %></div>
+  </div>
+
+  <div class="form-group"><%= form.label :address_line, class: "font-weight-bold" %><%= form.text_area :address_line, rows: 3, class: "form-control" %></div>
+
+  <div class="d-flex justify-content-between mt-4"><%= link_to "Back", teachers_path, class: "btn btn-outline-secondary" %><%= form.submit class: "btn text-white", style: "background-color: #0F0E47; border-color: #0F0E47;" %></div>
+<% end %>

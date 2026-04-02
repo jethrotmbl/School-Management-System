@@ -1,0 +1,7 @@
+<%= form_with(model: degree, local: true) do |form| %>
+  <% if degree.errors.any? %><div class="alert alert-danger"><%= degree.errors.full_messages.to_sentence %></div><% end %>
+  <div class="form-group"><%= form.label :name, class: "font-weight-bold" %><%= form.text_field :name, class: "form-control" %></div>
+  <div class="form-group"><%= form.label :code, class: "font-weight-bold" %><%= form.text_field :code, class: "form-control" %></div>
+  <div class="form-group"><%= form.label :description, class: "font-weight-bold" %><%= form.text_area :description, rows: 4, class: "form-control" %></div>
+  <div class="d-flex justify-content-between mt-4"><%= link_to "Back", degrees_path, class: "btn btn-outline-secondary" %><%= form.submit class: "btn text-white", style: "background-color: #0F0E47; border-color: #0F0E47;" %></div>
+<% end %>

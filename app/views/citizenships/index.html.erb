@@ -1,0 +1,9 @@
+<%
+  columns = [
+    { title: "Citizenship", class: "font-weight-bold", value: ->(citizenship) { citizenship.name } },
+    { title: "Description", class: "", value: ->(citizenship) { citizenship.description.presence || "-" } },
+    { title: "Related Records", class: "", value: ->(citizenship) { citizenship.students.count + citizenship.teachers.count + citizenship.guardians.count } },
+    { title: "Actions", class: "text-right", html: ->(citizenship) { resource_grid_actions(citizenship, view_path: citizenship_path(citizenship), edit_path: edit_citizenship_path(citizenship), delete_path: citizenship_path(citizenship)) } }
+  ]
+%>
+<%= render "layouts/resource_index_grid", title: "Citizenships", new_label: "New Citizenship", new_path: new_citizenship_path, collection: @citizenships, columns: columns, grid_id: "citizenships-grid" %>

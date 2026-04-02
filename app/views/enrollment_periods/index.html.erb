@@ -1,0 +1,10 @@
+<%
+  columns = [
+    { title: "Enrollment Period", class: "font-weight-bold", value: ->(period) { period.name } },
+    { title: "School Year", class: "", value: ->(period) { period.school_year.name } },
+    { title: "Date Range", class: "", value: ->(period) { "#{period.starts_on.strftime('%b %d, %Y')} - #{period.ends_on.strftime('%b %d, %Y')}" } },
+    { title: "Status", class: "", value: ->(period) { period.status.titleize } },
+    { title: "Actions", class: "text-right", html: ->(period) { resource_grid_actions(period, view_path: enrollment_period_path(period), edit_path: edit_enrollment_period_path(period), delete_path: enrollment_period_path(period)) } }
+  ]
+%>
+<%= render "layouts/resource_index_grid", title: "Enrollment Periods", new_label: "New Period", new_path: new_enrollment_period_path, collection: @enrollment_periods, columns: columns, grid_id: "enrollment-periods-grid" %>

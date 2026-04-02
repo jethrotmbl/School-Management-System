@@ -1,0 +1,56 @@
+<%= form_with(model: student, local: true) do |form| %>
+  <% if student.errors.any? %>
+    <div class="alert alert-danger">
+      <strong><%= pluralize(student.errors.count, "error") %> prevented this student from being saved:</strong>
+      <ul class="mb-0 mt-2">
+        <% student.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="alert alert-info">Student number is generated automatically when the record is saved.</div>
+
+  <div class="row">
+    <div class="col-md-3 form-group"><%= form.label :first_name, class: "font-weight-bold" %><%= form.text_field :first_name, class: "form-control" %></div>
+    <div class="col-md-3 form-group"><%= form.label :middle_name, class: "font-weight-bold" %><%= form.text_field :middle_name, class: "form-control" %></div>
+    <div class="col-md-3 form-group"><%= form.label :last_name, class: "font-weight-bold" %><%= form.text_field :last_name, class: "form-control" %></div>
+    <div class="col-md-3 form-group"><%= form.label :suffix, class: "font-weight-bold" %><%= form.text_field :suffix, class: "form-control" %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 form-group"><%= form.label :birth_date, class: "font-weight-bold" %><%= form.date_field :birth_date, class: "form-control" %></div>
+    <div class="col-md-3 form-group"><%= form.label :gender, class: "font-weight-bold" %><%= form.select :gender, [["Male", "male"], ["Female", "female"], ["Other", "other"]], { include_blank: "Select gender" }, class: "form-control" %></div>
+    <div class="col-md-3 form-group"><%= form.label :status, class: "font-weight-bold" %><%= form.select :status, Student::STATUSES.map { |status| [status.titleize, status] }, {}, class: "form-control" %></div>
+    <div class="col-md-3 form-group"><%= form.label :citizenship_id, "Citizenship", class: "font-weight-bold" %><%= form.collection_select :citizenship_id, @citizenships, :id, :name, { include_blank: "Select citizenship" }, class: "form-control" %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 form-group"><%= form.label :email, class: "font-weight-bold" %><%= form.email_field :email, class: "form-control" %></div>
+    <div class="col-md-6 form-group"><%= form.label :phone, class: "font-weight-bold" %><%= form.text_field :phone, class: "form-control" %></div>
+  </div>
+
+  <div class="form-group"><%= form.label :address_line, class: "font-weight-bold" %><%= form.text_area :address_line, rows: 3, class: "form-control" %></div>
+
+  <div class="row">
+    <div class="col-md-4 form-group"><%= form.label :country_id, "Country", class: "font-weight-bold" %><%= form.collection_select :country_id, @countries, :id, :name, { include_blank: "Select country" }, class: "form-control" %></div>
+    <div class="col-md-4 form-group"><%= form.label :region_id, "Region", class: "font-weight-bold" %><%= form.collection_select :region_id, @regions, :id, :name, { include_blank: "Select region" }, class: "form-control" %></div>
+    <div class="col-md-4 form-group"><%= form.label :province_id, "Province", class: "font-weight-bold" %><%= form.collection_select :province_id, @provinces, :id, :name, { include_blank: "Select province" }, class: "form-control" %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 form-group"><%= form.label :city_id, "City", class: "font-weight-bold" %><%= form.collection_select :city_id, @cities, :id, :name, { include_blank: "Select city" }, class: "form-control" %></div>
+    <div class="col-md-6 form-group"><%= form.label :barangay_id, "Barangay", class: "font-weight-bold" %><%= form.collection_select :barangay_id, @barangays, :id, :name, { include_blank: "Select barangay" }, class: "form-control" %></div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :guardian_ids, "Assigned Guardians", class: "font-weight-bold" %>
+    <%= form.collection_select :guardian_ids, @guardians, :id, :full_name, {}, { multiple: true, class: "form-control admin-multi-select" } %>
+  </div>
+
+  <div class="d-flex justify-content-between mt-4">
+    <%= link_to "Back", students_path, class: "btn btn-outline-secondary" %>
+    <%= form.submit class: "btn text-white", style: "background-color: #0F0E47; border-color: #0F0E47;" %>
+  </div>
+<% end %>

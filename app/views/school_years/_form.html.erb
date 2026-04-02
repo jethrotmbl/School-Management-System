@@ -1,0 +1,11 @@
+<%= form_with(model: school_year, local: true) do |form| %>
+  <% if school_year.errors.any? %><div class="alert alert-danger"><%= school_year.errors.full_messages.to_sentence %></div><% end %>
+  <div class="row">
+    <div class="col-md-4 form-group"><%= form.label :name, class: "font-weight-bold" %><%= form.text_field :name, class: "form-control" %></div>
+    <div class="col-md-4 form-group"><%= form.label :starts_on, class: "font-weight-bold" %><%= form.date_field :starts_on, class: "form-control" %></div>
+    <div class="col-md-4 form-group"><%= form.label :ends_on, class: "font-weight-bold" %><%= form.date_field :ends_on, class: "form-control" %></div>
+  </div>
+  <div class="form-group"><%= form.label :status, class: "font-weight-bold" %><%= form.select :status, SchoolYear::STATUSES.map { |status| [status.titleize, status] }, {}, class: "form-control" %></div>
+  <div class="form-group"><%= form.label :description, class: "font-weight-bold" %><%= form.text_area :description, rows: 4, class: "form-control" %></div>
+  <div class="d-flex justify-content-between mt-4"><%= link_to "Back", school_years_path, class: "btn btn-outline-secondary" %><%= form.submit class: "btn text-white", style: "background-color: #0F0E47; border-color: #0F0E47;" %></div>
+<% end %>

@@ -1,0 +1,46 @@
+<div class="card page-card">
+  <div class="card-header resource-card-header py-3 px-4">
+    <div class="d-flex justify-content-between align-items-center flex-wrap">
+      <div>
+        <h1 class="section-title h3 mb-1"><%= @search_mode ? "Search Teachers" : "Teachers" %></h1>
+        <p class="text-muted mb-0">Monitor faculty profiles, departments, handled classes, and active student load.</p>
+      </div>
+      <%= link_to "New Teacher", new_teacher_path, class: "btn resource-grid__create-button text-white" %>
+    </div>
+  </div>
+
+  <div class="card-body pt-4">
+    <%= form_with url: (@search_mode ? search_teachers_path : teachers_path), method: :get, local: true, class: "admin-search-form" do %>
+      <div class="row g-3 align-items-end">
+        <div class="col-md-8">
+          <%= label_tag :q, "Search by employee number, name, or email", class: "font-weight-bold" %>
+          <%= text_field_tag :q, @search_query, class: "form-control", placeholder: "Search teachers" %>
+        </div>
+        <div class="col-md-4 d-flex gap-2">
+          <%= submit_tag "Search", class: "btn btn-outline-brand flex-grow-1" %>
+          <%= link_to "Reset", teachers_path, class: "btn btn-outline-secondary flex-grow-1" %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="resource-grid-shell mt-4">
+      <table class="table resource-kendo-grid mb-0">
+        <thead><tr><th>Employee No.</th><th>Name</th><th>Department</th><th>Classes</th><th>Status</th><th class="text-right">Actions</th></tr></thead>
+        <tbody>
+          <% @teachers.each do |teacher| %>
+            <tr>
+              <td class="font-weight-bold"><%= teacher.employee_number %></td>
+              <td><div class="font-weight-bold"><%= teacher.full_name %></div><div class="text-muted small"><%= teacher.email.presence || "-" %></div></td>
+              <td><%= teacher.department&.name || "-" %></td>
+              <td><%= teacher.academic_classes.count %></td>
+              <td><span class="badge badge-light text-uppercase"><%= teacher.status %></span></td>
+              <td class="text-right"><%= resource_grid_actions(teacher, view_path: teacher_path(teacher), edit_path: edit_teacher_path(teacher), delete_path: teacher_path(teacher)) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination-wrap d-flex justify-content-center mt-4"><%= paginate @teachers, window: 2, outer_window: 0, left: 0, right: 0 %></div>
+  </div>
+</div>

@@ -10,52 +10,51 @@
   </head>
 
   <body class="app-body">
-    <nav class="navbar navbar-expand-lg navbar-dark app-navbar mb-4">
-      <div class="container">
-        <%= link_to root_path, class: "navbar-brand app-navbar__brand" do %>
-          <span class="app-navbar__brand-icon" aria-hidden="true">
-            <%= bootstrap_icon("mortarboard-fill", classes: "app-navbar__brand-svg") %>
-          </span>
-          <span class="app-navbar__brand-text">School Management System</span>
-        <% end %>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" 
-                                        aria-controls="mainNavigation" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+    <main class="app-page-main">
+      <section class="home-dashboard-shell">
+        <header
+          id="home-dashboard-toolbar"
+          class="home-dashboard-toolbar"
+          data-navigation-items="<%= json_escape(drawer_navigation_items.to_json) %>"
+          data-current-key="<%= current_drawer_key %>"
+          data-current-child-key="<%= current_drawer_child_key %>">
+          <div class="home-dashboard-toolbar__inner">
+            <button
+              id="home-dashboard-menu-button"
+              type="button"
+              class="home-dashboard-toolbar__toggle"
+              aria-label="Open navigation">
+              <span class="home-dashboard-toolbar__toggle-line"></span>
+              <span class="home-dashboard-toolbar__toggle-line"></span>
+              <span class="home-dashboard-toolbar__toggle-line"></span>
+            </button>
 
-        <% unless controller_name == "home" %>
-          <div class="collapse navbar-collapse" id="mainNavigation">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item <%= 'active' if controller_name == 'home' %>">
-                                              <%= link_to "Home", root_path, class: "nav-link" %></li>
-              <li class="nav-item <%= 'active' if controller_name == 'countries' %>">
-                                              <%= link_to "Countries", countries_path, class: "nav-link" %></li>
-              <li class="nav-item <%= 'active' if controller_name == 'regions' %>">
-                                              <%= link_to "Regions", regions_path, class: "nav-link" %></li>
-              <li class="nav-item <%= 'active' if controller_name == 'provinces' %>">
-                                              <%= link_to "Provinces", provinces_path, class: "nav-link" %></li>
-              <li class="nav-item <%= 'active' if controller_name == 'cities' %>">
-                                              <%= link_to "Cities", cities_path, class: "nav-link" %></li>
-              <li class="nav-item <%= 'active' if controller_name == 'barangays' %>">
-                                              <%= link_to "Barangays", barangays_path, class: "nav-link" %></li>
-            </ul>
+            <div class="home-dashboard-toolbar__title-wrap">
+              <span class="home-dashboard-toolbar__title">School Management System</span>
+            </div>
           </div>
-        <% end %>
-      </div>
-    </nav>
+        </header>
 
-    <main class="container pb-5">
-      <% flash.each do |type, message| %>
-        <% next if message.blank? %>
-        <% alert_class = type.to_s == "notice" ? "alert-success" : "alert-danger" %>
-        <div class="alert <%= alert_class %> alert-dismissible fade show" role="alert">
-          <%= message %>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div class="home-dashboard-layout">
+          <div class="home-dashboard-layout__rail">
+            <div id="home-dashboard-drawer" class="home-dashboard-drawer"></div>
+            <div id="home-dashboard-subdrawer" class="home-dashboard-subdrawer" aria-hidden="true"></div>
+          </div>
+
+          <div id="home-dashboard-content" class="home-dashboard-content">
+            <% flash.each do |type, message| %>
+              <% next if message.blank? %>
+              <% alert_class = type.to_s == "notice" ? "alert-success" : "alert-danger" %>
+              <div class="alert <%= alert_class %> alert-dismissible fade show" role="alert">
+                <%= message %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <% end %>
+
+            <%= yield %>
+          </div>
         </div>
-      <% end %>
-
-      <%= yield %>
-      
+      </section>
     </main>
 
     <footer class="app-footer mt-auto">
@@ -70,7 +69,7 @@
         </nav>
         <div class="app-footer__brand">
           <span class="app-footer__brand-icon" aria-hidden="true">
-            <%= bootstrap_icon("mortarboard-fill", classes: "app-footer__brand-svg") %>
+            <%= kendo_icon("home", classes: "app-footer__brand-icon-symbol") %>
           </span>
           <p class="app-footer__title">School Management System</p>
         </div>

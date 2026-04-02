@@ -1,47 +1,30 @@
-HOMEPAGE_CARDS = [
-  {
-    title: "Countries",
-    description: "Open the countries listing or create a new country record from this dashboard.",
-    icon: "globe2",
-    actions: [
-      { label: "All Countries", path: "/countries" },
-      { label: "Create Country", path: "/countries/new?return_to=%2F" },
-    ]
-  },
-  {
-    title: "Regions",
-    description: "Open the regions listing or create a new region record from this dashboard.",
-    icon: "diagram-3-fill",
-    actions: [
-      { label: "All Regions", path: "/regions" },
-      { label: "Create Region", path: "/regions/new?return_to=%2F" }
-    ]
-  },
-  {
-    title: "Provinces",
-    description: "Open the provinces listing or create a new province record from this dashboard.",
-    icon: "geo-alt-fill",
-    actions: [
-      { label: "All Provinces", path: "/provinces" },
-      { label: "Create Province", path: "/provinces/new?return_to=%2F" }
-    ]
-  },
-  {
-    title: "Cities",
-    description: "Open the cities listing or create a new city record from this dashboard.",
-    icon: "building",
-    actions: [
-      { label: "All Cities", path: "/cities" },
-      { label: "Create City", path: "/cities/new?return_to=%2F" }
-    ]
-  },
-  {
-    title: "Barangays",
-    description: "Open the barangays listing or create a new barangay record from this dashboard.",
-    icon: "map",
-    actions: [
-      { label: "All Barangays", path: "/barangays" },
-      { label: "Create Barangay", path: "/barangays/new?return_to=%2F" }
-    ]
-  }
-].freeze
+students_card = HomepageCard.create!(title: "Students", description: "Manage student master records, relationships, and current academic load.", icon: "user", position: 1)
+CardAction.create!(homepage_card: students_card, label: "All Students", path: "/students", position: 1)
+CardAction.create!(homepage_card: students_card, label: "Search Students", path: "/students/search", position: 2)
+
+teachers_card = HomepageCard.create!(title: "Teachers", description: "Review faculty profiles, handled classes, and department assignments.", icon: "user-group", position: 2)
+CardAction.create!(homepage_card: teachers_card, label: "All Teachers", path: "/teachers", position: 1)
+CardAction.create!(homepage_card: teachers_card, label: "Search Teachers", path: "/teachers/search", position: 2)
+CardAction.create!(homepage_card: teachers_card, label: "Departments", path: "/departments", position: 3)
+
+guardians_card = HomepageCard.create!(title: "Guardians", description: "Track guardian contacts and linked students for active family records.", icon: "group", position: 3)
+CardAction.create!(homepage_card: guardians_card, label: "All Guardians", path: "/guardians", position: 1)
+CardAction.create!(homepage_card: guardians_card, label: "Search Guardians", path: "/guardians/search", position: 2)
+
+school_years_card = HomepageCard.create!(title: "School Years", description: "Open school years and monitor the periods, classes, and enrollments inside them.", icon: "calendar-date", position: 4)
+CardAction.create!(homepage_card: school_years_card, label: "Open School Year", path: "/school_years/new?open_now=1", position: 1)
+
+academics_card = HomepageCard.create!(title: "Academics", description: "Organize the degree structure, class offerings, and enrollment activity of the school.", icon: "book", position: 5)
+CardAction.create!(homepage_card: academics_card, label: "Degrees", path: "/degrees", position: 1)
+CardAction.create!(homepage_card: academics_card, label: "Field of Study", path: "/field_of_studies", position: 2)
+CardAction.create!(homepage_card: academics_card, label: "Classes", path: "/academic_classes", position: 3)
+CardAction.create!(homepage_card: academics_card, label: "Enrollments", path: "/enrollments", position: 4)
+CardAction.create!(homepage_card: academics_card, label: "Enrollment Periods", path: "/enrollment_periods", position: 5)
+
+locations_card = HomepageCard.create!(title: "Locations", description: "Maintain location registries and citizenship references used by the student directory.", icon: "globe", position: 6)
+CardAction.create!(homepage_card: locations_card, label: "Countries", path: "/countries", position: 1)
+CardAction.create!(homepage_card: locations_card, label: "Regions", path: "/regions", position: 2)
+CardAction.create!(homepage_card: locations_card, label: "Provinces", path: "/provinces", position: 3)
+CardAction.create!(homepage_card: locations_card, label: "Cities", path: "/cities", position: 4)
+CardAction.create!(homepage_card: locations_card, label: "Barangays", path: "/barangays", position: 5)
+CardAction.create!(homepage_card: locations_card, label: "Citizenship", path: "/citizenships", position: 6)

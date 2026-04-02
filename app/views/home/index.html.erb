@@ -7,22 +7,21 @@
 <section class="dashboard-summary card">
   <div class="card-body">
     <div class="dashboard-summary__header">
-      <h2 class="dashboard-summary__title">Statistics Overview</h2>
-      <p class="dashboard-summary__subtitle">Current totals across your core records.</p>
+      <h2 class="dashboard-summary__title">Quick Overview</h2>
+      <p class="dashboard-summary__subtitle">Current totals across your key school records.</p>
     </div>
 
     <div class="dashboard-summary__grid">
-      <% @resource_cards.each do |card| %>
-        <% count = @counts[card.title] || 0 %>
+      <% @summary_items.each do |item| %>
         <div class="dashboard-summary__item">
           <div class="dashboard-summary__item-head">
             <span class="dashboard-summary__icon" aria-hidden="true">
-              <%= bootstrap_icon(card.icon, classes: "dashboard-summary__icon-svg") %>
+              <%= kendo_icon(item[:icon], classes: "dashboard-summary__icon-symbol") %>
             </span>
-            <span class="dashboard-summary__label"><%= card.title %></span>
+            <span class="dashboard-summary__label"><%= item[:title] %></span>
           </div>
-          <div class="dashboard-summary__value"><%= count %></div>
-          <div class="dashboard-summary__meta"><%= pluralize(count, "record") %> total</div>
+          <div class="dashboard-summary__value"><%= item[:count] %></div>
+          <div class="dashboard-summary__meta"><%= pluralize(item[:count], "record") %> total</div>
         </div>
       <% end %>
     </div>
