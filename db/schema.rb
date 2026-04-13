@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_04_01_090000) do
+ActiveRecord::Schema.define(version: 2026_04_03_104500) do
 
   create_table "academic_classes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "school_year_id", null: false
@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(version: 2026_04_01_090000) do
     t.string "name", null: false
     t.date "starts_on", null: false
     t.date "ends_on", null: false
-    t.string "status", default: "upcoming", null: false
+    t.string "status", default: "planning", null: false
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -226,6 +226,7 @@ ActiveRecord::Schema.define(version: 2026_04_01_090000) do
     t.boolean "primary_contact", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "relationship_to_student"
     t.index ["guardian_id"], name: "index_student_guardians_on_guardian_id"
     t.index ["student_id", "guardian_id"], name: "index_student_guardians_on_student_id_and_guardian_id", unique: true
     t.index ["student_id"], name: "index_student_guardians_on_student_id"

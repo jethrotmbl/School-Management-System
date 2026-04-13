@@ -52,9 +52,16 @@
     });
 
     $table.find("tbody tr").each(function() {
+      var $row = $(this);
+
+      // Ignore Kendo-generated helper/group rows when rebuilding from cached pages.
+      if ($row.hasClass("k-grouping-row") || $row.hasClass("k-group-footer") || $row.hasClass("k-detail-row")) {
+        return;
+      }
+
       var row = {};
 
-      $(this).find("td").each(function(index) {
+      $row.find("td").each(function(index) {
         var fieldName = fieldNames[index];
 
         if (!fieldName) {
@@ -79,7 +86,12 @@
       var $table = $(this);
       var config;
 
+      if ($table.attr("data-resource-grid-enhanced") === "true") {
+        return;
+      }
+
       if ($table.data("kendoGrid")) {
+        $table.attr("data-resource-grid-enhanced", "true");
         return;
       }
 
@@ -105,6 +117,8 @@
           template: "No records found."
         }
       });
+
+      $table.attr("data-resource-grid-enhanced", "true");
     });
   }
 

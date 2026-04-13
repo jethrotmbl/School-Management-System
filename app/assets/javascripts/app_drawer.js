@@ -1,4 +1,40 @@
 (function() {
+  function cleanupHomeDashboardDrawer($drawer, $subdrawerHost, $menuButton) {
+    var existingDrawer = $drawer.data("kendoDrawer");
+
+    if (existingDrawer && typeof existingDrawer.destroy === "function") {
+      existingDrawer.destroy();
+    }
+
+    $menuButton.off(".homeDrawer");
+    $drawer.off(".homeDrawerItem");
+    $subdrawerHost.off(".homeDrawerSubdrawer");
+
+    $subdrawerHost
+      .removeClass("home-dashboard-subdrawer--open")
+      .attr("aria-hidden", "true")
+      .css("margin-top", "")
+      .empty();
+
+    $drawer
+      .removeData("kendoDrawer")
+      .attr("class", "home-dashboard-drawer")
+      .removeAttr("style")
+      .empty();
+  }
+
+  function teardownHomeDashboardDrawer() {
+    var $drawer = $("#home-dashboard-drawer");
+    var $subdrawerHost = $("#home-dashboard-subdrawer");
+    var $menuButton = $("#home-dashboard-menu-button");
+
+    if (!$drawer.length || !$subdrawerHost.length || !$menuButton.length) {
+      return;
+    }
+
+    cleanupHomeDashboardDrawer($drawer, $subdrawerHost, $menuButton);
+  }
+
   function initializeHomeDashboardDrawer() {
     var $drawer = $("#home-dashboard-drawer");
     var $subdrawerHost = $("#home-dashboard-subdrawer");
@@ -93,9 +129,8 @@
       return;
     }
 
-    if ($drawer.data("kendoDrawer")) {
-      return;
-    }
+    // Rebuild from a clean state so Turbolinks restore/back cannot duplicate drawer markup.
+    cleanupHomeDashboardDrawer($drawer, $subdrawerHost, $menuButton);
 
     navigationItems = JSON.parse($toolbar.attr("data-navigation-items") || "[]");
 
@@ -238,4 +273,11 @@
   }
 
   $(document).on("turbolinks:load", initializeHomeDashboardDrawer);
+  $(document).on("turbolinks:before-cache", teardownHomeDashboardDrawer);
+
+  window.addEventListener("pageshow", function(event) {
+    if (event.persisted) {
+      initializeHomeDashboardDrawer();
+    }
+  });
 })();

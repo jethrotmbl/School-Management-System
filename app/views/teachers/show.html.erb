@@ -4,14 +4,23 @@
       <div><div class="muted-label">Teacher Profile</div><h1 class="section-title h3 mb-0"><%= @teacher.full_name %></h1><div class="text-muted mt-1"><%= @teacher.employee_number %></div></div>
       <div class="d-flex gap-2"><%= link_to "Edit", edit_teacher_path(@teacher), class: "btn btn-outline-brand" %><%= link_to "Back", teachers_path, class: "btn btn-outline-secondary" %></div>
     </div>
-    <div class="row">
-      <div class="col-md-3 mb-3"><div class="muted-label">Department</div><div><%= @teacher.department&.name || "-" %></div></div>
-      <div class="col-md-3 mb-3"><div class="muted-label">Status</div><div><%= @teacher.status.titleize %></div></div>
-      <div class="col-md-3 mb-3"><div class="muted-label">Hire Date</div><div><%= @teacher.hire_date&.strftime("%b %d, %Y") || "-" %></div></div>
-      <div class="col-md-3 mb-3"><div class="muted-label">Citizenship</div><div><%= @teacher.citizenship&.name || "-" %></div></div>
-      <div class="col-md-6 mb-3"><div class="muted-label">Email</div><div><%= @teacher.email.presence || "-" %></div></div>
-      <div class="col-md-6 mb-3"><div class="muted-label">Phone</div><div><%= @teacher.phone.presence || "-" %></div></div>
-      <div class="col-md-12 mb-3"><div class="muted-label">Specialization</div><div><%= @teacher.specialization.presence || "-" %></div></div>
+    <div class="row g-3 align-items-start">
+      <div class="col-lg-8">
+        <div class="row">
+          <div class="col-md-6 mb-3"><div class="muted-label">Department</div><div><%= @teacher.department&.name || "-" %></div></div>
+          <div class="col-md-6 mb-3"><div class="muted-label">Status</div><div><%= @teacher.status.titleize %></div></div>
+          <div class="col-md-6 mb-3"><div class="muted-label">Hire Date</div><div><%= @teacher.hire_date&.strftime("%b %d, %Y") || "-" %></div></div>
+          <div class="col-md-6 mb-3"><div class="muted-label">Citizenship</div><div><%= @teacher.citizenship&.name || "-" %></div></div>
+          <div class="col-md-6 mb-3"><div class="muted-label">Email</div><div><%= @teacher.email.presence || "-" %></div></div>
+          <div class="col-md-6 mb-3"><div class="muted-label">Phone</div><div><%= @teacher.phone.presence || "-" %></div></div>
+          <div class="col-md-12 mb-3"><div class="muted-label">Specialization</div><div><%= @teacher.specialization.presence || "-" %></div></div>
+        </div>
+      </div>
+      <div class="col-lg-4 d-flex justify-content-lg-end justify-content-start">
+        <div class="admin-profile-photo-wrap">
+          <%= profile_image_tag(@teacher, category: :teachers) %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

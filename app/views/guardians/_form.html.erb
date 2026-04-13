@@ -8,9 +8,8 @@
   </div>
 
   <div class="row">
-    <div class="col-md-4 form-group"><%= form.label :relationship_to_student, class: "font-weight-bold" %><%= form.text_field :relationship_to_student, class: "form-control" %></div>
-    <div class="col-md-4 form-group"><%= form.label :occupation, class: "font-weight-bold" %><%= form.text_field :occupation, class: "form-control" %></div>
-    <div class="col-md-4 form-group"><%= form.label :citizenship_id, "Citizenship", class: "font-weight-bold" %><%= form.collection_select :citizenship_id, @citizenships, :id, :name, { include_blank: "Select citizenship" }, class: "form-control" %></div>
+    <div class="col-md-6 form-group"><%= form.label :occupation, class: "font-weight-bold" %><%= form.text_field :occupation, class: "form-control" %></div>
+    <div class="col-md-6 form-group"><%= form.label :citizenship_id, "Citizenship", class: "font-weight-bold" %><%= form.collection_select :citizenship_id, @citizenships, :id, :name, { include_blank: "Select citizenship" }, class: "form-control" %></div>
   </div>
 
   <div class="row">
@@ -31,7 +30,40 @@
     <div class="col-md-6 form-group"><%= form.label :barangay_id, "Barangay", class: "font-weight-bold" %><%= form.collection_select :barangay_id, @barangays, :id, :name, { include_blank: "Select barangay" }, class: "form-control" %></div>
   </div>
 
-  <div class="form-group"><%= form.label :student_ids, "Linked Students", class: "font-weight-bold" %><%= form.collection_select :student_ids, @students, :id, :full_name, {}, { multiple: true, class: "form-control admin-multi-select" } %></div>
+  <div class="form-group">
+    <label class="font-weight-bold d-block">Linked Students and Relationship</label>
+    <% if @students.any? %>
+      <div class="table-responsive">
+        <table class="table table-sm mb-0">
+          <thead>
+            <tr>
+              <th style="width: 96px;">Link</th>
+              <th>Student</th>
+              <th>Relationship for this student</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @students.each do |student| %>
+              <% link_input = @student_link_inputs[student.id] || { selected: false, relationship: "" } %>
+              <tr>
+                <td>
+                  <div class="form-check mb-0">
+                    <%= check_box_tag "guardian[student_links][#{student.id}][selected]", "1", link_input[:selected], id: "guardian_student_link_#{student.id}", class: "form-check-input" %>
+                    <%= label_tag "guardian_student_link_#{student.id}", "Link", class: "form-check-label small" %>
+                  </div>
+                </td>
+                <td><%= student.full_name %></td>
+                <td><%= text_field_tag "guardian[student_links][#{student.id}][relationship]", link_input[:relationship], class: "form-control form-control-sm", placeholder: "e.g. Mother, Aunt" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <small class="form-text text-muted">A guardian can have different relationships for each student.</small>
+    <% else %>
+      <div class="text-muted">No students available to link yet.</div>
+    <% end %>
+  </div>
 
   <div class="d-flex justify-content-between mt-4"><%= link_to "Back", guardians_path, class: "btn btn-outline-secondary" %><%= form.submit class: "btn text-white", style: "background-color: #0F0E47; border-color: #0F0E47;" %></div>
 <% end %>

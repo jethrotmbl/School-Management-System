@@ -15,29 +15,26 @@ school_year_2024 = SchoolYear.create!(
   description: "Previous school year kept for historical records."
 )
 
-EnrollmentPeriod.create!(
-  school_year: school_year_2025,
+school_year_2025.enrollment_periods.ordered.first.update!(
   name: "First Semester Enrollment",
   starts_on: Date.new(2025, 5, 2),
   ends_on: Date.new(2025, 6, 15),
-  status: "open",
+  status: "active",
   description: "Main onboarding period for first semester."
 )
 
-EnrollmentPeriod.create!(
-  school_year: school_year_2025,
+school_year_2025.enrollment_periods.ordered.second.update!(
   name: "Second Semester Enrollment",
   starts_on: Date.new(2025, 10, 20),
   ends_on: Date.new(2025, 11, 30),
-  status: "upcoming",
+  status: "planning",
   description: "Second semester enrollment window."
 )
 
-EnrollmentPeriod.create!(
-  school_year: school_year_2024,
+school_year_2024.enrollment_periods.ordered.first.update!(
   name: "Historical Enrollment",
   starts_on: Date.new(2024, 5, 2),
   ends_on: Date.new(2024, 6, 15),
-  status: "closed",
+  status: "completed",
   description: "Closed sample period."
 )

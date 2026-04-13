@@ -9,9 +9,8 @@ class SchoolYearsController < ApplicationController
   end
 
   def show
-    @enrollment_periods = @school_year.enrollment_periods.order(:starts_on)
-    @academic_classes = @school_year.academic_classes.includes(:teacher).ordered
-    @enrollments = @school_year.enrollments.includes(:student, :academic_class).recent_first.limit(10)
+    @school_year.ensure_default_enrollment_periods!
+    @enrollment_periods = @school_year.enrollment_periods.ordered
   end
 
   def new

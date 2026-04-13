@@ -62,6 +62,8 @@ GEM
     date (3.5.1-java)
     erubi (1.13.1)
     execjs (2.10.0)
+    faker (2.22.0)
+      i18n (>= 1.8.11, < 2)
     ffi (1.17.3-java)
     globalid (1.1.0)
       activesupport (>= 5.0)
@@ -189,6 +191,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-jdbcmysql-adapter
   coffee-rails (~> 4.2)
+  faker
   jbuilder (~> 2.5)
   kaminari
   puma (~> 3.11)

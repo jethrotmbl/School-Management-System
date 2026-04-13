@@ -81,6 +81,15 @@
   vertical-align: middle;
 }
 
+.resource-grid-shell .resource-kendo-grid th.text-right,
+.resource-grid-shell .resource-kendo-grid td.text-right {
+  text-align: left !important;
+}
+
+.resource-grid-shell .resource-kendo-grid td.text-right .resource-grid-actions {
+  justify-content: flex-start;
+}
+
 .resource-grid-shell .name-text {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -103,6 +112,31 @@
 .resource-grid-actions .btn {
   margin: 0;
   flex: 0 0 auto;
+}
+
+.students-grid-table .student-name-link,
+.students-grid-table .student-name-link:hover,
+.students-grid-table .student-name-link:focus,
+.students-grid-table .student-name-link:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+.teachers-grid-table .teacher-name-link,
+.teachers-grid-table .teacher-name-link:hover,
+.teachers-grid-table .teacher-name-link:focus,
+.teachers-grid-table .teacher-name-link:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+.students-grid-table th.actions-column,
+.students-grid-table td.actions-column {
+  text-align: left;
+}
+
+.students-grid-table .resource-grid-actions {
+  justify-content: flex-start;
 }
 
 @media (max-width: 768px) {

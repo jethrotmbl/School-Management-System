@@ -1,0 +1,93 @@
+"en-PH":
+  faker:
+    name:
+      first_name:
+        - Juan
+        - Jose
+        - Maria
+        - Ana
+        - Mark
+        - Miguel
+        - Carlo
+        - Paolo
+        - Angelo
+        - Christian
+        - Kevin
+        - Joshua
+        - Daniel
+        - Ryan
+        - Patrick
+        - John
+        - Jerome
+        - Francis
+        - Emmanuel
+        - Vincent
+        - Andrea
+        - Camille
+        - Krizia
+        - Janine
+        - Bea
+        - Trisha
+        - Kristine
+        - Angelica
+        - Joy
+        - Hazel
+        - Lester
+        - Marvin
+        - Jomar
+        - Marvin
+        - Ralph
+        - Kenneth
+        - Allan
+        - Rey
+        - Alvin
+        - Noel
+        - Sheila
+        - Clarisse
+        - Denise
+        - Patricia
+        - Monica
+        - Nikki
+      last_name:
+        - Dela Cruz
+        - Santos
+        - Reyes
+        - Bautista
+        - Garcia
+        - Mendoza
+        - Ramos
+        - Torres
+        - Flores
+        - Rivera
+        - Gonzales
+        - Aquino
+        - Villanueva
+        - Navarro
+        - Cruz
+        - Mercado
+        - Dominguez
+        - Castillo
+        - Salazar
+        - Lim
+        - Tan
+        - Chua
+        - Ong
+        - Sy
+        - Co
+        - Uy
+        - Abad
+        - Panganiban
+        - Manalo
+        - De Guzman
+        - Del Rosario
+        - Evangelista
+        - Padilla
+        - Velasco
+        - Miranda
+        - Fernandez
+        - Soriano
+        - Natividad
+        - Macapagal
+        - Arceo
+      name:
+        - "#{first_name} #{last_name}"

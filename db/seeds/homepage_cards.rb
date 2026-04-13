@@ -2,7 +2,7 @@ students_card = HomepageCard.create!(title: "Students", description: "Manage stu
 CardAction.create!(homepage_card: students_card, label: "All Students", path: "/students", position: 1)
 CardAction.create!(homepage_card: students_card, label: "Search Students", path: "/students/search", position: 2)
 
-teachers_card = HomepageCard.create!(title: "Teachers", description: "Review faculty profiles, handled classes, and department assignments.", icon: "user-group", position: 2)
+teachers_card = HomepageCard.create!(title: "Teachers", description: "Review faculty profiles, handled classes, and department assignments.", icon: "clipboard", position: 2)
 CardAction.create!(homepage_card: teachers_card, label: "All Teachers", path: "/teachers", position: 1)
 CardAction.create!(homepage_card: teachers_card, label: "Search Teachers", path: "/teachers/search", position: 2)
 CardAction.create!(homepage_card: teachers_card, label: "Departments", path: "/departments", position: 3)
@@ -12,7 +12,7 @@ CardAction.create!(homepage_card: guardians_card, label: "All Guardians", path: 
 CardAction.create!(homepage_card: guardians_card, label: "Search Guardians", path: "/guardians/search", position: 2)
 
 school_years_card = HomepageCard.create!(title: "School Years", description: "Open school years and monitor the periods, classes, and enrollments inside them.", icon: "calendar-date", position: 4)
-CardAction.create!(homepage_card: school_years_card, label: "Open School Year", path: "/school_years/new?open_now=1", position: 1)
+CardAction.create!(homepage_card: school_years_card, label: "Open School Year", path: "/school_years", position: 1)
 
 academics_card = HomepageCard.create!(title: "Academics", description: "Organize the degree structure, class offerings, and enrollment activity of the school.", icon: "book", position: 5)
 CardAction.create!(homepage_card: academics_card, label: "Degrees", path: "/degrees", position: 1)

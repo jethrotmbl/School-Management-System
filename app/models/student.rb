@@ -32,7 +32,10 @@ class Student < ApplicationRecord
   }
 
   def full_name
-    [last_name, first_name, middle_name.presence, suffix.presence].compact.join(", ")
+    given_names = [first_name, middle_name.presence].compact.join(" ").strip
+    base_name = [last_name, given_names.presence].compact.join(", ")
+
+    [base_name, suffix.presence].compact.join(" ")
   end
 
   def location_name

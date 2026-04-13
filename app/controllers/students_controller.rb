@@ -19,7 +19,9 @@ class StudentsController < ApplicationController
 
   def show
     @current_enrollments = @student.enrollments.includes(academic_class: [:teacher, :school_year]).recent_first.limit(10)
-    @linked_guardians = @student.guardians.order(:last_name, :first_name)
+    @linked_student_guardians = @student.student_guardians.includes(:guardian)
+                                      .joins(:guardian)
+                                      .merge(Guardian.ordered)
     @linked_teachers = @student.teachers.includes(:department).order(:last_name, :first_name)
   end
 
@@ -56,7 +58,7 @@ class StudentsController < ApplicationController
   private
 
   def set_student
-    @student = Student.includes(:citizenship, :country, :region, :province, :city, :barangay, :guardians, :teachers).find(params[:id])
+    @student = Student.includes(:citizenship, :country, :region, :province, :city, :barangay, :guardians, :teachers, student_guardians: :guardian).find(params[:id])
   end
 
   def load_form_dependencies

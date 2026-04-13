@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   resources :degrees
   resources :field_of_studies
   resources :academic_classes
-  resources :enrollment_periods
+  resources :enrollment_periods do
+    member { patch :set_current }
+  end
   resources :enrollments
   resources :citizenships
   resources :barangays

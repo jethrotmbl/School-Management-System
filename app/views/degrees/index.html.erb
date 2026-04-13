@@ -2,7 +2,7 @@
   columns = [
     { title: "Code", class: "font-weight-bold", value: ->(degree) { degree.code.presence || "-" } },
     { title: "Degree", class: "font-weight-bold", value: ->(degree) { degree.name } },
-    { title: "Fields", class: "", value: ->(degree) { degree.field_of_studies.count } },
+    { title: "Total Units", class: "", value: ->(degree) { format("%.2f", degree.academic_classes.sum { |academic_class| academic_class.units.to_f }) } },
     { title: "Classes", class: "", value: ->(degree) { degree.academic_classes.count } },
     { title: "Actions", class: "text-right", html: ->(degree) { resource_grid_actions(degree, view_path: degree_path(degree), edit_path: edit_degree_path(degree), delete_path: degree_path(degree)) } }
   ]

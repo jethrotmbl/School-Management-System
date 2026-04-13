@@ -32,7 +32,7 @@ class HomeDashboard
   def build_summary_items
     [
       { title: "Students", icon: "user", count: Student.count },
-      { title: "Teachers", icon: "user-group", count: Teacher.count },
+      { title: "Teachers", icon: "clipboard", count: Teacher.count },
       { title: "Guardians", icon: "group", count: Guardian.count },
       { title: "School Years", icon: "calendar-date", count: SchoolYear.count }
     ]

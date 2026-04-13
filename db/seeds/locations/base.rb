@@ -1,21 +1,48 @@
-philippines = Country.create!(
-  name: "Philippines",
-  description: "Primary operating country for the school management sample data."
-)
+puts "Loading static location seed data..."
 
-Country.create!(name: "United States", description: "Reference country for international record samples.")
+load Rails.root.join("db", "seeds", "countries.rb")
+load Rails.root.join("db", "seeds", "regions.rb")
+load Rails.root.join("db", "seeds", "provinces.rb")
+load Rails.root.join("db", "seeds", "cities.rb")
+load Rails.root.join("db", "seeds", "barangays.rb")
 
-ncr = Region.create!(name: "National Capital Region", country: philippines, description: "Metro Manila administrative region.")
-calabarzon = Region.create!(name: "CALABARZON", country: philippines, description: "Region IV-A")
+COUNTRY_NAMES.each do |name|
+  Country.find_or_create_by!(name: name)
+end
 
-metro_manila = Province.create!(name: "Metro Manila", region: ncr, description: "Metro Manila")
-laguna = Province.create!(name: "Laguna", region: calabarzon, description: "Laguna province")
+philippines = Country.find_by!(name: "Philippines")
 
-quezon_city = City.create!(name: "Quezon City", province: metro_manila, description: "Largest city in Metro Manila", is_municipality: false)
-manila = City.create!(name: "Manila", province: metro_manila, description: "Capital city of the Philippines", is_municipality: false)
-sta_rosa = City.create!(name: "Santa Rosa", province: laguna, description: "Laguna growth center", is_municipality: false)
+REGION_NAMES.each do |name|
+  Region.find_or_create_by!(name: name, country: philippines)
+end
 
-Barangay.create!(name: "Bagumbayan", city: quezon_city, description: "Sample barangay for QC")
-Barangay.create!(name: "Commonwealth", city: quezon_city, description: "Sample barangay for QC")
-Barangay.create!(name: "Barangay 659", city: manila, description: "Sample barangay for Manila")
-Barangay.create!(name: "Aplaya", city: sta_rosa, description: "Sample barangay for Santa Rosa")
+PROVINCE_DATA.each do |region_name, province_names|
+  region = Region.find_by!(name: region_name)
+
+  province_names.each do |province_name|
+    Province.find_or_create_by!(name: province_name, region: region)
+  end
+end
+
+CITY_DATA.each do |province_name, city_name, is_municipality|
+  province = Province.find_by!(name: province_name)
+
+  City.find_or_create_by!(
+    name: city_name,
+    province: province,
+    is_municipality: is_municipality
+  )
+end
+
+BARANGAY_DATA.each do |barangay_data|
+  province = Province.find_by!(name: barangay_data[:province_name])
+  city = City.find_by!(name: barangay_data[:city_name], province: province)
+
+  Barangay.find_or_create_by!(
+    name: barangay_data[:name],
+    city: city
+  )
+end
+
+puts "Static locations loaded: #{Country.count} countries, #{Region.count} regions, #{Province.count} provinces, #{City.count} cities/municipalities, #{Barangay.count} barangays."
+

@@ -42,6 +42,8 @@
           </div>
 
           <div id="home-dashboard-content" class="home-dashboard-content">
+            <%= render_app_breadcrumbs %>
+
             <% flash.each do |type, message| %>
               <% next if message.blank? %>
               <% alert_class = type.to_s == "notice" ? "alert-success" : "alert-danger" %>

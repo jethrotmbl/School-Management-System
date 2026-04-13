@@ -1,21 +1,32 @@
 <article class="resource-card card">
-  <div class="card-body d-flex flex-column">
-    <div class="resource-card__topline">
+  <div class="card-body">
+    <div class="resource-card__strip">
+      <div class="resource-card__strip-title">
+        <span class="resource-card__strip-icon" aria-hidden="true"><%= kendo_icon(card.icon, classes: "resource-card__strip-icon-symbol") %></span>
+        <h2 class="resource-card__title"><%= card.title %></h2>
+      </div>
+    </div>
+
+    <div class="resource-card__content">
       <span class="resource-card__eyebrow">Admin Module</span>
-      <span class="resource-card__badge"><%= pluralize(dashboard_card_count(card.title), "record") %></span>
-    </div>
 
-    <div class="resource-card__header">
-      <span class="resource-card__icon" aria-hidden="true"><%= kendo_icon(card.icon, classes: "resource-card__icon-symbol") %></span>
-      <h2 class="resource-card__title"><%= card.title %></h2>
-    </div>
-
-    <p class="resource-card__text"><%= card.description %></p>
-
-    <div class="resource-card__actions mt-auto">
-      <% card.card_actions.each do |action| %>
-        <%= link_to action.label, action.path, class: "btn btn-outline-brand resource-card__button" %>
-      <% end %>
+      <div class="resource-card__actions" role="list">
+        <% card.card_actions.each do |action| %>
+          <% is_search_action = action.label.to_s.downcase.include?("search") %>
+          <%= link_to action.path,
+                      class: "resource-card__action",
+                      role: "listitem",
+                      data: (is_search_action ? { search_prompt: true, search_label: action.label } : {}) do %>
+            <span class="resource-card__action-main">
+              <span class="resource-card__action-icon" aria-hidden="true">
+                <%= kendo_icon(is_search_action ? "search" : "menu") %>
+              </span>
+              <span class="resource-card__action-label"><%= action.label %></span>
+            </span>
+            <span class="resource-card__action-chevron" aria-hidden="true"><%= kendo_icon("chevron-right") %></span>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </article>

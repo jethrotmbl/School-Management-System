@@ -1,10 +1,10 @@
 class EnrollmentPeriodsController < ApplicationController
-  before_action :set_enrollment_period, only: %i[show edit update destroy]
+  before_action :set_enrollment_period, only: %i[show edit update destroy set_current]
   before_action :load_form_dependencies, only: %i[new create edit update]
 
   def index
     @enrollment_periods = EnrollmentPeriod.includes(:school_year, :academic_classes, :enrollments)
-                                          .order(starts_on: :desc, name: :asc)
+                        .order(starts_on: :desc, name: :asc)
                                           .page(params[:page])
                                           .per(10)
   end
@@ -15,7 +15,7 @@ class EnrollmentPeriodsController < ApplicationController
   end
 
   def new
-    @enrollment_period = EnrollmentPeriod.new
+    @enrollment_period = EnrollmentPeriod.new(status: "planning")
   end
 
   def edit
@@ -42,6 +42,13 @@ class EnrollmentPeriodsController < ApplicationController
   def destroy
     @enrollment_period.destroy
     redirect_to enrollment_periods_path, status: :see_other, notice: "Enrollment period was successfully deleted."
+  end
+
+  def set_current
+    @enrollment_period.set_current!
+    redirect_to school_year_path(@enrollment_period.school_year), notice: "Current term updated successfully."
+  rescue ActiveRecord::RecordInvalid
+    redirect_to school_year_path(@enrollment_period.school_year), alert: @enrollment_period.errors.full_messages.to_sentence.presence || "Unable to set current term."
   end
 
   private
