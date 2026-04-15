@@ -1,7 +1,7 @@
 # README
 
-A web-based School Management System designed to streamline and manage school operations such as student records, teacher management, guardians, and enrollment processes. The system provides a centralized platform for efficient data management and organization. <br>
-
+A web-based School Management System designed to streamline and manage school operations such as student records, teacher management, guardians, and enrollment processes. The system provides a centralized platform for efficient data management and organization.
+<br></br>
 **Features**
   <ul>Student management (add, edit, delete, view)</ul>
   <ul>Teacher management</ul>
