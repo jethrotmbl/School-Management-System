@@ -49,6 +49,13 @@ STUDENT_COUNT.times do |index|
     barangay: selected_barangay
   )
 
+  attach_seed_profile_image!(
+    record: student,
+    folder_name: "students",
+    code_prefix: "S",
+    image_index: index + 1
+  )
+
   primary_guardian = guardians[index % guardians.length]
   secondary_guardian = guardians[(index + (guardians.length / 2)) % guardians.length]
 

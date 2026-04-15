@@ -29,7 +29,7 @@ GUARDIAN_COUNT.times do |index|
 
   sanitized_email_name = "#{first_name}.#{last_name}".downcase.gsub(/[^a-z0-9.]/, "")
 
-  Guardian.create!(
+  guardian = Guardian.create!(
     first_name: first_name,
     middle_name: middle_name,
     last_name: last_name,
@@ -44,5 +44,12 @@ GUARDIAN_COUNT.times do |index|
     province: selected_province,
     city: selected_city,
     barangay: selected_barangay
+  )
+
+  attach_seed_profile_image!(
+    record: guardian,
+    folder_name: "guardians",
+    code_prefix: "G",
+    image_index: index + 1
   )
 end

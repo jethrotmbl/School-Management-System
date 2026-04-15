@@ -24,7 +24,7 @@ TEACHER_COUNT.times do |index|
   last_name = Faker::Name.last_name
   sanitized_email_name = "#{first_name}.#{last_name}".downcase.gsub(/[^a-z0-9.]/, "")
 
-  Teacher.create!(
+  teacher = Teacher.create!(
     employee_number: "EMP-2026-#{(index + 1).to_s.rjust(4, '0')}",
     first_name: first_name,
     middle_name: middle_name,
@@ -37,5 +37,12 @@ TEACHER_COUNT.times do |index|
     address_line: "Blk #{(index + 1).to_s.rjust(3, '0')}, #{city_names[index % city_names.length]}",
     department: departments[index % departments.length],
     citizenship: filipino
+  )
+
+  attach_seed_profile_image!(
+    record: teacher,
+    folder_name: "teachers",
+    code_prefix: "T",
+    image_index: index + 1
   )
 end

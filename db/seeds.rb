@@ -66,6 +66,41 @@ def ensure_profile_image_placeholders!(folder_name:, target_count:, code_prefix:
   end
 end
 
+def seeded_profile_image_path(folder_name:, code_prefix:, image_index:)
+  root_path = Rails.root.join("db", "seeds", "images", folder_name)
+  return unless Dir.exist?(root_path)
+
+  extensions = %w[png jpg jpeg webp gif]
+
+  extensions.each do |extension|
+    file_path = root_path.join("#{code_prefix}#{image_index}.#{extension}")
+    return file_path if File.exist?(file_path)
+
+    padded_file_path = root_path.join("#{code_prefix}#{image_index.to_s.rjust(3, '0')}.#{extension}")
+    return padded_file_path if File.exist?(padded_file_path)
+  end
+
+  nil
+end
+
+def attach_seed_profile_image!(record:, folder_name:, code_prefix:, image_index:)
+  return if record.blank? || !record.respond_to?(:profile_photo)
+
+  image_path = seeded_profile_image_path(
+    folder_name: folder_name,
+    code_prefix: code_prefix,
+    image_index: image_index
+  )
+  return if image_path.blank?
+
+  File.open(image_path, "rb") do |file|
+    record.profile_photo.attach(
+      io: file,
+      filename: File.basename(image_path)
+    )
+  end
+end
+
 ensure_profile_image_placeholders!(folder_name: "students", target_count: 100, code_prefix: "S", fallback_prefix: "student")
 ensure_profile_image_placeholders!(folder_name: "teachers", target_count: 50, code_prefix: "T", fallback_prefix: "teacher")
 ensure_profile_image_placeholders!(folder_name: "guardians", target_count: 100, code_prefix: "G", fallback_prefix: "guardian")
