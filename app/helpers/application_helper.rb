@@ -1,5 +1,4 @@
 module ApplicationHelper
-  require "base64"
 
   def kendo_icon(name, classes: nil, label: nil)
     resolved_name = normalize_kendo_icon_name(name)
@@ -161,19 +160,6 @@ module ApplicationHelper
     end
   end
 
-  def dashboard_card_count(title)
-    case title
-    when "Students" then Student.count
-    when "Teachers" then Teacher.count
-    when "Guardians" then Guardian.count
-    when "School Years" then SchoolYear.count
-    when "Academics" then Degree.count + FieldOfStudy.count + AcademicClass.count + Enrollment.count + EnrollmentPeriod.count
-    when "Locations" then Country.count + Region.count + Province.count + City.count + Barangay.count + Citizenship.count
-    else
-      0
-    end
-  end
-
   def render_app_breadcrumbs
     crumbs = app_breadcrumbs
     return if crumbs.blank?
@@ -290,76 +276,24 @@ module ApplicationHelper
   end
 
   def profile_image_source(record, category:)
-    seeded_data = seeded_profile_image_data(record, category: category)
-    return seeded_data if seeded_data.present?
+    uploaded_photo = uploaded_profile_photo(record)
+    return uploaded_photo if uploaded_photo.present?
 
-    generated_profile_avatar(record)
+    generated_anonymous_avatar(category)
   end
 
-  def seeded_profile_image_data(record, category:)
-    return if record.blank? || record.respond_to?(:id) && record.id.blank?
+  def uploaded_profile_photo(record)
+    return if record.blank?
+    return unless record.respond_to?(:profile_photo)
+    return unless record.profile_photo.attached?
 
-    folder_name = category.to_s.pluralize
-    root_path = Rails.root.join("db", "seeds", "images", folder_name)
-    return unless Dir.exist?(root_path)
-
-    record_id = record.id.to_i
-    return if record_id <= 0
-
-    preferred_prefix = seeded_profile_image_prefix(category)
-    selected_file = seeded_profile_image_file_for_id(root_path, preferred_prefix, record_id)
-    selected_file ||= seeded_profile_image_file_for_id(root_path, category.to_s.singularize, record_id)
-    return unless selected_file
-
-    extension = File.extname(selected_file.to_s).delete(".").downcase
-    mime_type = case extension
-                when "jpg", "jpeg"
-                  "image/jpeg"
-                when "gif"
-                  "image/gif"
-                when "webp"
-                  "image/webp"
-                else
-                  "image/png"
-                end
-
-    encoded_file = Base64.strict_encode64(File.binread(selected_file))
-    "data:#{mime_type};base64,#{encoded_file}"
+    record.profile_photo
   rescue StandardError
     nil
   end
 
-  def seeded_profile_image_prefix(category)
-    case category.to_s.singularize
-    when "student"
-      "S"
-    when "teacher"
-      "T"
-    when "guardian"
-      "G"
-    else
-      category.to_s.singularize
-    end
-  end
-
-  def seeded_profile_image_file_for_id(root_path, prefix, id)
-    extensions = %w[png jpg jpeg webp gif]
-    candidate_bases = ["#{prefix}#{id}", "#{prefix}#{id.to_s.rjust(3, '0')}"]
-
-    candidate_bases.each do |base_name|
-      extensions.each do |extension|
-        path = root_path.join("#{base_name}.#{extension}")
-        return path if File.exist?(path)
-      end
-    end
-
-    nil
-  end
-
-  def generated_profile_avatar(record)
-    label = breadcrumb_record_label(record).to_s
-    initials = label.split(/\s+/).map { |part| part[0] }.compact.first(2).join.upcase
-    initials = "NA" if initials.blank?
+  def generated_anonymous_avatar(category)
+    label = "Anonymous #{category.to_s.singularize.titleize}".strip
 
     svg = <<~SVG
       <svg xmlns="http://www.w3.org/2000/svg" width="336" height="336" viewBox="0 0 336 336" role="img" aria-label="#{ERB::Util.html_escape(label)}">
@@ -372,7 +306,6 @@ module ApplicationHelper
         <rect width="336" height="336" rx="24" fill="url(#avatar-bg)"/>
         <circle cx="168" cy="118" r="64" fill="#0f172a" fill-opacity="0.92"/>
         <path d="M58 286c0-58 48-96 110-96s110 38 110 96" fill="#0f172a" fill-opacity="0.86"/>
-        <text x="168" y="308" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="44" font-weight="700" fill="#ffffff">#{ERB::Util.html_escape(initials)}</text>
       </svg>
     SVG
 

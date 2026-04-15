@@ -78,7 +78,8 @@ class GuardiansController < ApplicationController
   def guardian_params
     params.require(:guardian).permit(
       :first_name, :middle_name, :last_name, :email, :phone, :occupation,
-      :address_line, :citizenship_id, :country_id, :region_id, :province_id, :city_id, :barangay_id
+      :address_line, :citizenship_id, :country_id, :region_id, :province_id, :city_id, :barangay_id,
+      :profile_photo
     )
   end
 

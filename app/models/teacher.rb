@@ -7,6 +7,7 @@ class Teacher < ApplicationRecord
   has_many :academic_classes, dependent: :nullify
   has_many :enrollments, -> { distinct }, through: :academic_classes
   has_many :students, -> { distinct }, through: :enrollments
+  has_one_attached :profile_photo
 
   before_validation :assign_employee_number, on: :create
 

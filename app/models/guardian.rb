@@ -8,6 +8,7 @@ class Guardian < ApplicationRecord
 
   has_many :student_guardians, dependent: :destroy
   has_many :students, through: :student_guardians
+  has_one_attached :profile_photo
 
   validates :first_name, :last_name, presence: true
 

@@ -13,6 +13,7 @@ class Student < ApplicationRecord
   has_many :enrollments, dependent: :destroy
   has_many :academic_classes, through: :enrollments
   has_many :teachers, -> { distinct }, through: :academic_classes
+  has_one_attached :profile_photo
 
   before_validation :assign_student_number, on: :create
 

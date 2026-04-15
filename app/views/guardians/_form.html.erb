@@ -1,6 +1,11 @@
 <%= form_with(model: guardian, local: true) do |form| %>
   <% if guardian.errors.any? %><div class="alert alert-danger"><%= guardian.errors.full_messages.to_sentence %></div><% end %>
 
+  <div class="form-group">
+    <%= form.label :profile_photo, "Profile Photo", class: "font-weight-bold" %>
+    <%= form.file_field :profile_photo, class: "form-control-file", accept: "image/png,image/jpeg,image/webp,image/gif" %>
+  </div>
+
   <div class="row">
     <div class="col-md-4 form-group"><%= form.label :first_name, class: "font-weight-bold" %><%= form.text_field :first_name, class: "form-control" %></div>
     <div class="col-md-4 form-group"><%= form.label :middle_name, class: "font-weight-bold" %><%= form.text_field :middle_name, class: "form-control" %></div>

@@ -3,6 +3,11 @@
     <div class="alert alert-danger"><%= teacher.errors.full_messages.to_sentence %></div>
   <% end %>
 
+  <div class="form-group">
+    <%= form.label :profile_photo, "Profile Photo", class: "font-weight-bold" %>
+    <%= form.file_field :profile_photo, class: "form-control-file", accept: "image/png,image/jpeg,image/webp,image/gif" %>
+  </div>
+
   <div class="row">
     <div class="col-md-4 form-group"><%= form.label :employee_number, class: "font-weight-bold" %><%= form.text_field :employee_number, class: "form-control", placeholder: "Leave blank to auto-generate" %></div>
     <div class="col-md-4 form-group"><%= form.label :department_id, "Department", class: "font-weight-bold" %><%= form.collection_select :department_id, @departments, :id, :name, { include_blank: "Select department" }, class: "form-control" %></div>
