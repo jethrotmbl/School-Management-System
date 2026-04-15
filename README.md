@@ -2,13 +2,13 @@
 
 A web-based School Management System designed to streamline and manage school operations such as student records, teacher management, guardians, and enrollment processes. The system provides a centralized platform for efficient data management and organization.
 
-**Features**
-  <li>Student management (add, edit, delete, view)</li>  
-  Teacher management
-  Guardian records management
-  Enrollment and class organization
-  Structured database management
-  Form validations and secure data handling
+<li>**Features**</li>
+  <ul>Student management (add, edit, delete, view)</ul>
+  <ul>Teacher management</ul>
+  <ul>Guardian records management</ul>
+  <ul>Enrollment and class organization</ul>
+  <ul>Structured database management</ul>
+  <ul>Form validations and secure data handling</ul>
 
 **Tech Stack**
 Backend: Ruby on Rails
