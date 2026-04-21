@@ -13,7 +13,7 @@ class Guardian < ApplicationRecord
   validates :first_name, :last_name, presence: true
 
   scope :ordered, -> { order(:last_name, :first_name) }
-  scope :search, lambda { |term|
+  scope :search, ->(term) {
     return all if term.blank?
 
     wildcard = "%#{term.to_s.strip.downcase}%"

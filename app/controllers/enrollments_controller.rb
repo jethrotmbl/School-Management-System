@@ -51,7 +51,7 @@ class EnrollmentsController < ApplicationController
   def load_form_dependencies
     @students = Student.ordered
     @academic_classes = AcademicClass.includes(:teacher, :school_year).ordered
-    @school_years = SchoolYear.recent_first
+    @school_years = SchoolYear.for_form_options(@enrollment&.school_year_id)
     @enrollment_periods = EnrollmentPeriod.includes(:school_year).order(:starts_on)
   end
 

@@ -105,7 +105,7 @@
         columns: config.columns,
         groupable: {
           messages: {
-            empty: "Drag a column header here to group this list"
+            empty: ""
           }
         },
         sortable: true,

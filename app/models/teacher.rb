@@ -16,7 +16,7 @@ class Teacher < ApplicationRecord
   validates :status, inclusion: { in: STATUSES }
 
   scope :ordered, -> { order(:last_name, :first_name) }
-  scope :search, lambda { |term|
+  scope :search, ->(term) {
     return all if term.blank?
 
     wildcard = "%#{term.to_s.strip.downcase}%"

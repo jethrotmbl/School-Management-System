@@ -51,6 +51,17 @@
       return $("<div>").text(value || "").html();
     }
 
+    function buildPromptMessage(label) {
+      var actionLabel = (label || "").toString().trim();
+      var subject = actionLabel.replace(/^search\s+/i, "").trim();
+
+      if (subject.length > 0) {
+        return "Type " + subject + " keyword then press Enter:";
+      }
+
+      return "Type your search keyword then press Enter:";
+    }
+
     function buildSubdrawerTemplate(item) {
       var subTemplate = "";
 
@@ -64,13 +75,14 @@
 
       $.each(item.children || [], function(_, child) {
         var childClasses = "home-dashboard-drawer__subdrawer-item";
+        var isSearchChild = /-search$/.test((child.key || "").toString());
 
         if (child.key === currentChildKey) {
           childClasses += " home-dashboard-drawer__subdrawer-item--active";
         }
 
         subTemplate +=
-          "<li class='" + childClasses + "' data-url='" + child.path + "'>" +
+          "<li class='" + childClasses + "' data-url='" + child.path + "' data-search-prompt='" + isSearchChild + "' data-search-label='" + escapeHtml(child.label) + "'>" +
             "<span class='home-dashboard-drawer__subdrawer-item-text'>" + escapeHtml(child.label) + "</span>" +
           "</li>";
       });
@@ -257,7 +269,12 @@
         closeSubdrawer();
       })
       .on("click.homeDrawerSubdrawer", ".home-dashboard-drawer__subdrawer-item", function() {
-        var destination = $(this).data("url");
+        var $item = $(this);
+        var destination = $item.data("url");
+        var promptForSearch = $item.data("search-prompt") === true;
+        var searchLabel = $item.data("search-label");
+        var query;
+        var url;
 
         closeSubdrawer();
         if (drawer) {
@@ -266,6 +283,27 @@
 
         if (!destination) {
           return;
+        }
+
+        if (promptForSearch) {
+          if (!/\/search(?:\?|$)/.test(destination)) {
+            destination = destination.replace(/\/$/, "") + "/search";
+          }
+
+          query = window.prompt(buildPromptMessage(searchLabel), "");
+
+          if (query === null) {
+            return;
+          }
+
+          query = query.toString().trim();
+          if (query.length === 0) {
+            return;
+          }
+
+          url = new URL(destination, window.location.origin);
+          url.searchParams.set("q", query);
+          destination = url.toString();
         }
 
         window.location.assign(destination);

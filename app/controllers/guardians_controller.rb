@@ -107,7 +107,7 @@ class GuardiansController < ApplicationController
     selected_student_ids = []
 
     submitted_links.each do |student_id, attributes|
-      attributes = attributes.respond_to?(:to_h) ? attributes.to_h : {}
+      attributes = normalize_student_link_attributes(attributes)
       selected_value = attributes[:selected] || attributes["selected"]
       next unless ActiveModel::Type::Boolean.new.cast(selected_value)
 
@@ -129,7 +129,7 @@ class GuardiansController < ApplicationController
 
     @student_link_inputs = if submitted_links.present?
       submitted_links.each_with_object({}) do |(student_id, attributes), result|
-        attributes = attributes.respond_to?(:to_h) ? attributes.to_h : {}
+        attributes = normalize_student_link_attributes(attributes)
         selected_value = attributes[:selected] || attributes["selected"]
         relationship_value = attributes[:relationship] || attributes["relationship"]
 
@@ -145,6 +145,18 @@ class GuardiansController < ApplicationController
           relationship: student_guardian.relationship_to_student.to_s
         }
       end
+    end
+  end
+
+  def normalize_student_link_attributes(attributes)
+    return {} unless attributes
+
+    if attributes.respond_to?(:permit)
+      attributes.permit(:selected, :relationship).to_h
+    elsif attributes.respond_to?(:to_h)
+      attributes.to_h
+    else
+      {}
     end
   end
 end

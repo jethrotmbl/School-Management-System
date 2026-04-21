@@ -15,7 +15,7 @@ class AcademicClass < ApplicationRecord
   validates :status, inclusion: { in: STATUSES }
 
   scope :ordered, -> { order(:title, :class_code) }
-  scope :search, lambda { |term|
+  scope :search, ->(term) {
     return all if term.blank?
 
     wildcard = "%#{term.to_s.strip.downcase}%"

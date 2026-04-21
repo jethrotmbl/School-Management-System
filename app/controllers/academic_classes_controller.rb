@@ -52,7 +52,7 @@ class AcademicClassesController < ApplicationController
   end
 
   def load_form_dependencies
-    @school_years = SchoolYear.recent_first
+    @school_years = SchoolYear.for_form_options(@academic_class&.school_year_id)
     @enrollment_periods = EnrollmentPeriod.includes(:school_year).order(:starts_on)
     @degrees = Degree.order(:name)
     @field_of_studies = FieldOfStudy.includes(:degree).order(:name)

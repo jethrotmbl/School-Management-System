@@ -12,7 +12,15 @@ class SchoolYear < ApplicationRecord
   validates :name, uniqueness: true
   validates :status, inclusion: { in: STATUSES }
 
+  scope :open_only, -> { where(status: "open") }
   scope :recent_first, -> { order(starts_on: :desc, name: :desc) }
+
+  def self.for_form_options(selected_id = nil)
+    relation = open_only
+    relation = relation.or(where(id: selected_id)) if selected_id.present?
+
+    relation.distinct.recent_first
+  end
 
   def open!
     update!(status: "open", opened_at: Time.current)

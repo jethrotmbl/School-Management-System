@@ -12,6 +12,8 @@ def truncate_tables!(*tables)
 end
 
 truncate_tables!(
+  "active_storage_attachments",
+  "active_storage_blobs",
   "card_actions",
   "homepage_cards",
   "enrollments",

@@ -58,7 +58,7 @@ class EnrollmentPeriodsController < ApplicationController
   end
 
   def load_form_dependencies
-    @school_years = SchoolYear.recent_first
+    @school_years = SchoolYear.for_form_options(@enrollment_period&.school_year_id)
   end
 
   def enrollment_period_params

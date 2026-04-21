@@ -10,7 +10,7 @@
   </div>
 
   <div class="card-body pt-4">
-    <%= form_with url: (@search_mode ? search_guardians_path : guardians_path), method: :get, local: true, class: "admin-search-form" do %>
+    <%= form_with url: search_guardians_path, method: :get, local: true, class: "admin-search-form" do %>
       <div class="row g-3 align-items-end">
         <div class="col-md-8"><%= text_field_tag :q, @search_query, class: "form-control", placeholder: "Search guardians" %></div>
         <div class="col-md-4 d-flex gap-2"><%= submit_tag "Search", class: "btn btn-outline-brand flex-grow-1" %><%= link_to "Reset", guardians_path, class: "btn btn-outline-secondary flex-grow-1" %></div>

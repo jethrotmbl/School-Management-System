@@ -10,7 +10,7 @@
   </div>
 
   <div class="card-body pt-4">
-    <%= form_with url: (@search_mode ? search_teachers_path : teachers_path), method: :get, local: true, class: "admin-search-form" do %>
+    <%= form_with url: search_teachers_path, method: :get, local: true, class: "admin-search-form" do %>
       <div class="row g-3 align-items-end">
         <div class="col-md-8">
           <%= text_field_tag :q, @search_query, class: "form-control", placeholder: "Search teachers" %>

@@ -68,8 +68,7 @@ module ApplicationHelper
         path: school_years_path,
         icon: "calendar-date",
         children: [
-          { key: "school_years-index", label: "All School Years", path: school_years_path },
-          { key: "school_years-new", label: "Open School Year", path: school_years_path }
+          { key: "school_years-index", label: "All School Years", path: school_years_path }
         ]
       },
       {
